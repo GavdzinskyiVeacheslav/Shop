@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<!-- Голова -->
+<head>
+  <!-- Меты: -->
+  <!-- Кодировка -->
+  <meta charset="utf-8">
+  <!-- Настройки Mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Заполнить мету для, телеграмма например -->
+  <meta name="description" content="Недорого купить или выгодно продать авто, квартиру, одежду, мебель, бытовую технику.
+  Найти работу или сотрудника">
+  <!-- Заполнить мету для ключевых слов -->
+  <meta name="KeyWords" content="доска объявлений израиля, доска объявлений, объявления">
+
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/fav.ico">
+
+  <!-- title -->
+  <title>Anastasia_shop</title>
+
+  <!-- Шрифты по надобности пример -->
+  <link rel="preload" href="/static/css/webfonts/fa-light-300.woff2" as="font" type="font/woff2" crossorigin="">
+  <link rel="preload" href="/static/css/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="">
+
+  <!-- CSS -->
+  <link rel="preload" href="/static/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="/static/css/bs.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="/static/css/bootstrap-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+  <!-- JS -->
+  <script src="/static/js/jquery-3.6.0.min.js" defer></script>
+  <script src="/static/js/main_page.js" defer></script>
+
+  <!-- В этот блок подключаем с той стороны например другого HTML: скрипты, стили, шрифты, и так далее -->
+  {% block specific_header %} {% endblock specific_header %}
+</head>
+
+<!-- Тело -->
+<body>
+    <!-- Подключить header HTML -->
+    {% include "/include/header.html" %}
+    <!-- В этот блок подключаем с той стороны например другого Специальные элементы -->
+    {% block special_elements %}{% endblock special_elements %}
+
+  <section class="container">
+
+    <!-- Основной блок тела с той стороны -->
+    {% block body %}{% endblock body %}
+    <!-- Блок логина с той стороны -->
+    {% block login %}{% endblock %}
+
+  </section>
+
+<!-- Подключить footer HTML -->
+{% include '/include/footer.html' %}
+
+</body>
+</html>

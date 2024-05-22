@@ -1,0 +1,41 @@
+<!-- pagination -->
+<nav class="d-flex pagination_nav">
+    <ul class="pagination">
+        <li class="page-item{% if data.first_disabled %} disabled{% endif %}">
+            <a class="shadow_block page-link"
+               href="/goods?p=1">
+                <span aria-hidden="true">&laquo;</span></a>
+        </li>
+        <li class="page-item{% if data.prev_disabled %} disabled{% endif %}">
+            <a class="shadow_block page-link"
+               href="/goods?p={{ data.prev_number }}"><span aria-hidden="true"><</span></a>
+        </li>
+        {% for page in data.pages %}
+        <li class="page-item{% if page.active %} active{% endif %}">
+            <a class="shadow_block page-link"
+               href="/goods?p={{ page.number }}">
+                {{ page.number }}</a></li>
+        {% endfor %}
+        <li class="page-item{% if data.next_disabled %} disabled text-muted{% endif %}">
+            <a class="shadow_block page-link"
+               href="/goods?p={{ data.next_number }}"><span
+                    aria-hidden="true">&raquo;</span></a>
+        </li>
+        <li class="page-item{% if data.last_disabled %} disabled text-muted{% endif %}">
+            <a class="shadow_block page-link"
+               href="/goods?p={{ data.last_number }}"><span aria-hidden="true">></span></a>
+        </li>
+    </ul>
+
+
+    <span class="" style="display:none;">
+        <select class="form-select form-select-sm d-inline records_per_page" style="width:70px;"
+                onchange="set_records_per_page(this.value, {{ page }})">
+            <option value="12"> 12</option>
+            <option value="24"> 24</option>
+            <option value="48"> 48</option>
+            <option value="96"> 96</option>
+        </select> записей на страницу
+    </span>
+
+</nav>

@@ -1,0 +1,239 @@
+{% extends '/layout.html' %}
+
+{% block specific_header %}
+<!-- Шрифт -->
+<link rel="preload" href="/static/css/webfonts/weathericons-regular-webfont.woff" as="font" type="font/woff2"
+      crossorigin="">
+<!-- JS -->
+<script src="/static/js/goods.js" defer></script>
+<script src="/static/js/control.js" defer></script>
+
+{% endblock specific_header %}
+
+{% block special_elements %}
+<div id="records_bottom_sheet" class="bottom_sheet dropdown_select_per_page">
+    <div class="bottom_sheet_handler"></div>
+    <div class="bottom_sheet_content">
+        <div class="mobile_menu_inner">
+            <div class="mobile_menu_block_header">
+                <div class="mobile_choose_city_title">Кол-во на странице</div>
+                <div class="close_mobile_menu_button"><i class="bi bi-x-lg"></i></div>
+            </div>
+            <div class="dropdown_select_list">
+                <div class="per_page_list_item {% if records_per_page == 12 %} list_checked {% endif %}"
+                     onclick="set_records_per_page(12, {{ page }})">по 12 объявлений
+                </div>
+                <div class="per_page_list_item {% if records_per_page == 24 %} list_checked {% endif %}"
+                     onclick="set_records_per_page(24, {{ page }})">по 24 объявлений
+                </div>
+                <div class="per_page_list_item {% if records_per_page == 48 %} list_checked {% endif %}"
+                     onclick="set_records_per_page(48, {{ page }})">по 48 объявлений
+                </div>
+                <div class="per_page_list_item {% if records_per_page == 96 %} list_checked {% endif %}"
+                     onclick="set_records_per_page(96, {{ page }})">по 96 объявлений
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock special_elements %}
+
+{% block body %}
+<div class="row">
+    <main class="column col-8" id="main1">
+        <input type="hidden" value="{{ category_id }}" id="category_id">
+        <input type="hidden" value="{{ section_id }}" id="section_id">
+
+        <div class="page-title mb-3 {% if not current_category and not search_filter %} d-none {% endif %}">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="url_for('public.ads')">Главная</a></li>
+
+                    {% if current_category %}
+                    <li class="breadcrumb-item"><a href="/{{ current_category.folder }}">{{ current_category.name }}</a>
+                    </li>
+                    {% endif %}
+
+                    {% if current_section %}
+                    <li class="breadcrumb-item"><a href="/{{ current_category.folder }}/{{ current_section.folder }}/">
+                        {{ current_section.name }}</a></li>
+                    {% endif %}
+
+                    {% if search_filter %}
+                    <li class="breadcrumb-item active" aria-current="page">Поиск "{{ search_filter }}"</li>
+                    {% endif %}
+
+                    {% if current_page > 1 %}
+                    <li class="breadcrumb-item active" aria-current="page">Страница {{ current_page }}</li>
+                    {% endif %}
+
+
+                </ol>
+            </nav>
+        </div>
+
+
+        <div class="ads_filters">
+            <div class="filters">
+
+                <div class="{% if city_ids|length > 0 %}filter_active{% endif %}">
+                    <div class="choose_city close_dropdown choose_block shadow_block">
+                        {% if city_ids|length > 0 %}
+                        <span class="choose_block_title">Выбраны города</span><span class="dropdown_select_count">: {{city_ids|length}}</span><i
+                            class="bi bi-chevron-down"></i>
+                        {% else %}
+                        <span class="choose_block_title">Выбрать город</span><span
+                            class="dropdown_select_count">: 0</span><i class="bi bi-chevron-down"></i>
+                        {% endif %}
+                    </div>
+                    <span class="clear_filter"><i class="fa fa-light fa-xmark"></i></span>
+                </div>
+
+            </div>
+
+            <div style="display:flex;">
+                <div class="records_per_page_block">
+                    <div class="choose_records_per_page choose_block close_dropdown shadow_block"><span
+                            class="choose_records_per_page_desk_text">по </span><span class="per_page_count">{{records_per_page}}</span><span
+                            class="choose_records_per_page_desk_text"> объявлений</span><i
+                            class="bi bi-chevron-down"></i></div>
+
+                </div>
+                <div class="post_visual_type_div">
+                    <div class="post_visual_type shadow_block">
+                        <div class="visual_list_button {% if visual_type!='grid' %}vis_active{% endif %}"><i
+                                class="bi bi-list-task"></i></div>
+                        <div class="visual_grid_button {% if visual_type=='grid' %}vis_active{% endif %}"><i
+                                class="bi bi-grid"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if not goods_list %}
+        <h3>Товары не найдены</h3>
+        {% endif %}
+
+        <div class="ads_list {% if visual_type=='grid' %}visual_grid{% else %}visual_list{% endif %}">
+
+
+            {% for good in goods_list %}
+            <article class="row data-block shadow_block mb-4">
+                <a href="/goods/{{ good.id }}">
+                    <div class="ad_data_block">
+                        <div class="breadcrumbs_mobile">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item">{{ good.category.name }}</li>
+                                <li class="breadcrumb-item">{{ good.section.name }}</li>
+                            </ul>
+                        </div>
+                        <div class="ad_data_inner">
+                            {% if good.photos %}
+                            <div class="col-3 ad-images">
+                                <div class="gallery">
+                                    <div class="main-wrapper">
+                                        {% for photo in good.photos %}
+                                        {% if loop.index == 1 %}
+                                        <img src="/{{ good.picture_preview }}"
+                                             id="main_image{{ good.id }}" alt="{{ good.description }}"
+                                             style="object-fit: cover;">
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    {% if good.photos|length > 1 %}
+                                    <div class="preview_images">
+                                        {% set photos_count = good.photos|length %}
+                                        {% if good.photos|length > 4 %}
+                                        {% set photos_count = 4 %}
+                                        {% endif %}
+                                        {% set result_count_photos = (100 / photos_count) %}
+                                        {% for photo in good.photos %}
+                                        {% if loop.index < 5 %}
+                                        <div style="width:{{ result_count_photos }}%;"
+                                             onmouseover="changeImage({{ photo.id }}, {{ good.id }})"></div>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <div style="display:none;" class="preview-images" id="preview-images{{ good.id }}">
+                                        {% for photo in good.photos %}
+                                        {% if loop.index < 4 %}
+                                        <div class="prev-image">
+                                            <img src="/{{ photo.picture_preview }}"
+                                                 id="image{{ photo.id }}"
+                                                 onmouseover="changeImage({{ photo.id }}, {{ good.id }})">
+                                        </div>
+                                        {% endif %}
+                                        {% if loop.index > 3 %}
+                                        <div class="prev-image" style="{% if loop.index > 3 %}display:none;{% endif %}">
+                                            <img src="/{{ photo.picture_preview }}"
+                                                 id="image{{ photo.id }}"
+                                                 onmouseover="changeImage({{ photo.id }}, {{ good.id }})">
+                                        </div>
+                                        {% endif %}
+
+                                        {% endfor %}
+                                        {% if good.photos|length > 3 %}
+                                        {% endif %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-9 ad-data">
+                                {% else %}
+                                <div class="ad-data without_image">
+                                    {% endif %}
+                                    <div>
+                                        <div class="breadcrumbs_desk col-12 tools-block d-flex justify-content-between">
+                                            <ul class="breadcrumb">
+                                                <li class="breadcrumb-item">{{ good.category.name }}</li>
+                                                <li class="breadcrumb-item">{{ good.section.name }}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="ad-desc">
+                                            <div class="ad_fav_holder"></div>
+                                            {{ good.description }}
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-between">
+                <span class="ad-date">
+                    <i class="fa fa-solid fa-calendar-days"></i>
+                        {{ good.create_date_day_month_year }} в {{ good.create_date_hours_minutes }}
+                </span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </a>
+                <div class="add_to_fav_buttons_div">
+
+                    <a href="javascript:"
+                       onclick="toggleFavourite({{ good.id }}, 1, {% if authorize %}1{% else %}0{% endif %})"
+                       title="Добавить в избранное" class="add_to_favorite_button ad_fav{{ good.id }}">
+                        <div>
+                            <i class="bi bi-heart"></i>
+                        </div>
+                    </a>
+
+                    <a href="javascript:"
+                       onclick="toggleFavourite({{ good.id }}, 0, {% if authorize %}1{% else %}0{% endif %})"
+                       title="Удалить из избранного"
+                       class="rem_fav{{ good.id }} text-danger remove_from_favorite_button d-none">
+                        <div>
+                            <i class="bi bi-heart-fill"></i>
+                        </div>
+                    </a>
+
+                </div>
+            </article>
+            {% endfor %}
+
+        </div>
+
+        {{ pagination | safe }}
+
+    </main>
+</div>
+
+
+{% endblock body %}
