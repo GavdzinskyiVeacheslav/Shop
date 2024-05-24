@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import datetime
 
 
 @dataclass
@@ -23,3 +24,23 @@ class Section:
     category_id: int = 0
     description: str = ''
     folder: str = ''
+
+
+@dataclass
+class Good:
+    id: int = 0
+    category_id: int = 0
+    section_id: int = 0
+    add_date: datetime = datetime.now()
+    name: str = ''
+    description: str = ''
+    price: float = 0.0
+    existence: int = 0
+
+
+
+
+
+
+
+

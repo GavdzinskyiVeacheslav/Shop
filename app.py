@@ -11,7 +11,7 @@ app = Flask(
 # Регистрация Блюпринта
 app.register_blueprint(public_bp, url_prefix='/')
 # Secret key
-app.secret_key = 'Вперёд к победе'
+app.secret_key = get_config()['secret_key'].get('key', "")
 
 if __name__ == '__main__':
     app.run(
