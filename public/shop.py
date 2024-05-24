@@ -2,6 +2,7 @@ from datetime import datetime
 
 from flask import render_template, request, session
 
+from business.good import Good
 from business.order import Order
 from public.routes import public_bp
 from utils import common
@@ -12,6 +13,28 @@ from utils.common import parse_int, categories_sections_list
 @public_bp.route("/goods")
 def goods():
     """Главная страница с товарами"""
+
+    # all_goods_ids = Good.all_goods_ids()
+    # goods_list = [Good(good_id=good_id) for good_id in all_goods_ids]
+
+    goods_list = range(1, 100)
+
+    return render_template(
+        '/goods.html',
+        goods_list=goods_list,
+        search_filter='',
+        client_name='Имя клиента',
+        client_email='Email клиента',
+        verified_email=1,
+        google_client=0,
+        authorize=session.get('client.logged_in', None),
+        # categories=categories,
+        # sections=sections,
+        city_ids=[],
+        current_year=datetime.now().year,
+        # records_per_page=records_per_page,
+        current_page=parse_int(request.args.get("p", 1)),
+    )
 
     # Пример
     # new_order = Order()
@@ -50,8 +73,8 @@ def goods():
     # unpaid_ad_ids = sorted(all_ad_ids - set(paid_ad_ids), reverse=True)
     #
     # Страница и кол. объявлений на странице для пагинации
-    page = parse_int(request.args.get("p", 1))
-    records_per_page = int(session['records_per_page']) if 'records_per_page' in session else 12
+    # page = parse_int(request.args.get("p", 1))
+    # records_per_page = int(session['records_per_page']) if 'records_per_page' in session else 12
     #
     # # Финальный список с пагинацией
     # start_position = (page - 1) * records_per_page
@@ -70,31 +93,28 @@ def goods():
     # Пагинация - количество объявлений на странице
     # records_per_page = int(session['records_per_page']) if 'records_per_page' in session else 12
 
-    final_list = []
-    all_goods_ids = []
-
     # Категории и разделы
-    categories, sections = categories_sections_list()
-
-    return render_template(
-        '/goods.html',
-        search_filter='',
-        goods_list=final_list,
-        client_name='Имя клиента',
-        client_email='Email клиента',
-        verified_email=1,
-        google_client=0,
-        authorize=session.get('client.logged_in', None),
-        categories=categories,
-        sections=sections,
-        city_ids=[],
-        current_year=datetime.now().year,
-        records_per_page=records_per_page,
-        current_page=parse_int(request.args.get("p", 1)),
-        pagination=common.pagination(
-            total_amount=len(all_goods_ids),
-            amount_per_page=records_per_page,
-            current_page=parse_int(request.args.get("p", 1)),
-            template_path='/paginator.html',
-        ) if final_list else '',
-    )
+    # categories, sections = categories_sections_list()
+    #
+    # return render_template(
+    #     '/goods.html',
+    #     search_filter='',
+    #     goods_list=goods_list,
+    #     client_name='Имя клиента',
+    #     client_email='Email клиента',
+    #     verified_email=1,
+    #     google_client=0,
+    #     authorize=session.get('client.logged_in', None),
+    #     categories=categories,
+    #     sections=sections,
+    #     city_ids=[],
+    #     current_year=datetime.now().year,
+    #     records_per_page=records_per_page,
+    #     current_page=parse_int(request.args.get("p", 1)),
+    #     pagination=common.pagination(
+    #         total_amount=len(all_goods_ids),
+    #         amount_per_page=records_per_page,
+    #         current_page=parse_int(request.args.get("p", 1)),
+    #         template_path='/paginator.html',
+    #     ) if final_list else '',
+    # )

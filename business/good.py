@@ -2,7 +2,7 @@ import dao.good as dao
 import model.models as model
 
 
-class Goods(object):
+class Good(object):
     def __init__(self, good_id=None, dto=None):
         self.__id = dto.id if dto else None
         self.__name = dto.name if dto else None

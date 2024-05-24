@@ -77,7 +77,7 @@ def all_goods_ids():
         sql=f"""
             SELECT id
             FROM goods
-            GOOD BY id DESC 
+            ORDER BY id DESC 
         """,
         params=()
     )
