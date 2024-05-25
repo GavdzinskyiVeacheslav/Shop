@@ -1660,3 +1660,58 @@ article.border_pink {border-color: #ef417c !important;}
 .column.col-auto h1 a img {
     margin-top: -25px; /* отступ сверху, может быть отрицательным для подъема */
 }
+
+
+/* STAS */
+
+.container_father_footer {
+    display: flex;
+    justify-content: space-between; /* Равномерное распределение пространства между элементами */
+    margin: 0 20%; /* Равномерный отступ слева и справа */
+}
+
+.container_father_footer .container_footer ul {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+@media screen and (max-width: 1200px) {
+    .container_father_footer {
+        margin: 0 10%; /* Уменьшаем отступ слева и справа */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container_father_footer {
+        flex-direction: column; /* Переключаем направление контейнера на столбец */
+        align-items: center; /* Выравниваем элементы по центру */
+        margin: 0 30px; /* Уменьшаем отступ слева и справа */
+    }
+}
+
+.telephone_number,
+.work_graphic {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.phone_numbers,
+.graphic_of_work {
+    list-style: none;
+    padding-left: 0;
+}
+
+.phone_numbers li,
+.graphic_of_work li {
+    margin-bottom: 5px;
+}
+
+.phone_numbers li:before,
+.graphic_of_work li:before {
+    content: "\2022"; /* Заменяем маркеры списка на круглые точки */
+    color: #666;
+    display: inline-block;
+    width: 10px;
+    margin-right: 5px;
+}
