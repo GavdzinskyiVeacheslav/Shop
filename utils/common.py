@@ -1,32 +1,53 @@
 import decimal
-
 import re
 
 from flask import render_template
 
 from business.category import Category
+from business.good import Good
 from business.section import Section
 
-
-def return_success(ok=1, error='', data=None):
-    return {
-        'success': 1,
-        'ok': ok,
-        'error': error,
-        'data': data
-    }
+# Константа для количества товаров на странице
+RECORDS_PER_PAGE = 12
 
 
-def return_error(ok=0, error='error', data=None):
-    return {
-        'success': 0,
-        'ok': ok,
-        'error': error,
-        'data': data
-    }
+def get_good_ids_after_search(search, all_goods_ids):
+    """Получить список айдишников товаров после поиска"""
+    if search:
+        goods_by_search = Good.good_ids_by_search(search=search)
+        return set(all_goods_ids).intersection(set(goods_by_search))
+    return set(all_goods_ids)
+
+
+def paginate_goods(good_ids, page):
+    """Пагинация товаров"""
+    start_position = (page - 1) * RECORDS_PER_PAGE
+    return list(good_ids)[start_position:start_position + RECORDS_PER_PAGE]
+
+
+def generate_pagination(all_goods_ids, page, final_list):
+    """Генерация данных для пагинации"""
+    return pagination(
+        total_amount=len(all_goods_ids),
+        amount_per_page=RECORDS_PER_PAGE,
+        current_page=page,
+        template_path='/paginator.html',
+    ) if final_list else ''
+
+
+def categories_sections_list():
+    """Списки категорий и разделов"""
+
+    categories = Category.all_categories()
+    sections = {}
+    for category in categories:
+        sections[category.id] = Section.list_section_by_category(category_id=category.id)
+
+    return categories, sections
 
 
 def parse_int(value: any = None) -> int:
+    """Защита на ввод числа"""
     if not value:
         return 0
 
@@ -84,6 +105,13 @@ def cut_inject(text=''):
         text = re.sub(regex, '', text, flags=re.S | re.I)
 
     return text
+
+
+def process_param(param_name: str, params: dict, default='', is_numeric=False):
+    """cut_inject и parse_int в одной функции"""
+    value = params.get(param_name, default)
+    cleaned_value = cut_inject(text=str(value)).strip()
+    return parse_int(cleaned_value) if is_numeric else cleaned_value
 
 
 def pagination(total_amount=0, amount_per_page=0, current_page=1, template_path=''):
@@ -150,39 +178,19 @@ def pagination(total_amount=0, amount_per_page=0, current_page=1, template_path=
     )
 
 
-def match_format_and(text):
-    """Формат для поиска ('беннет     либерман нетанияху ' -> '+беннет* +либерман* +нетанияху*')"""
-    return ' '.join([f'+{word}*' for word in text.strip().split(' ') if word])
+def return_success(ok=1, error='', data=None):
+    return {
+        'success': 1,
+        'ok': ok,
+        'error': error,
+        'data': data
+    }
 
 
-def process_param(param_name: str, params: dict, default='', is_numeric=False):
-    """cut_inject и parse_int в одной функции"""
-    value = params.get(param_name, default)
-    cleaned_value = cut_inject(text=str(value)).strip()
-    return parse_int(cleaned_value) if is_numeric else cleaned_value
-
-
-def categories_sections_list():
-    """Списки категорий и разделов"""
-
-    categories = Category.all_categories()
-    sections = {}
-    for category in categories:
-        sections[category.id] = Section.list_section_by_category(category_id=category.id)
-
-    return categories, sections
-
-
-def remove_html_tags_and_links(text=''):
-    """Убирает html тэги и ссылки"""
-    # Pattern to match HTML tags
-    tag_re = re.compile(r'<[^>]+>')
-    # Pattern to match URLs
-    url_re = re.compile(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
-
-    # Remove HTML tags
-    result = tag_re.sub('', text)
-    # Remove URLs
-    result = url_re.sub('', result)
-
-    return result
+def return_error(ok=0, error='error', data=None):
+    return {
+        'success': 0,
+        'ok': ok,
+        'error': error,
+        'data': data
+    }

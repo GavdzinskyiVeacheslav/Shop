@@ -21,16 +21,6 @@ def db_connection():
     return mysql.connector.connect(**config)
 
 
-# Подключение ко второй базе если нужно
-# def db_connection_shop():
-#     return mysql.connector.connect(
-#         user='Slava',
-#         password='Nub4ek114455',
-#         host='localhost',
-#         database='shop',
-#     )
-
-
 def db_statement(statement_type, sql, params, dictionary=True, auto_commit=True, db_connection_param=None):
     """
     Запуск исполняемого оператора MySQL

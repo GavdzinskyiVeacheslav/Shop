@@ -82,3 +82,22 @@ def all_goods_ids():
         params=()
     )
     return [row['id'] for row in rows]
+
+
+def good_ids_by_search(search=''):
+    rows = db.db_statement(
+        statement_type='List',
+        sql=f"""
+            SELECT id, MATCH (name) AGAINST (%s IN BOOLEAN MODE) AS score
+            FROM goods
+            GROUP BY id
+            HAVING score > 0
+            ORDER BY score DESC
+        """,
+        params=(
+            search,
+        )
+    )
+    return [row['id'] for row in rows]
+
+

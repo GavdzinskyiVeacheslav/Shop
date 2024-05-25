@@ -3,13 +3,6 @@ from datetime import datetime
 
 
 @dataclass
-class Order:
-    id: int = 0
-    name: str = ''
-    description: str = ''
-
-
-@dataclass
 class Category:
     id: int = 0
     name: str = ''
@@ -36,11 +29,3 @@ class Good:
     description: str = ''
     price: float = 0.0
     existence: int = 0
-
-
-
-
-
-
-
-

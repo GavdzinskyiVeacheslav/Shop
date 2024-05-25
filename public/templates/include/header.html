@@ -48,11 +48,11 @@
                             <div class="search_input_div">
                                 <input type="text" class="form-control" placeholder="Поиск товара" aria-label=""
                                        id="search_request" value="{% if search_filter %}{{ search_filter }}{% endif %}"
-                                       onkeydown="if(event.keyCode===13) {set_ads_filter();}">
+                                       onkeydown="if(event.keyCode===13) {search();}">
                                 <button class="search_clear_button" onclick="clear_search()" title="Очистить текст">
                                     <i class="fa fa-light fa-xmark"></i></button>
 
-                                <button type="button" class="btn search_button" onclick="set_ads_filter();"
+                                <button type="button" class="btn search_button" onclick="search();"
                                         title="Поиск"><i class="bi bi-search"></i></button>
                             </div>
                         </div>
@@ -127,16 +127,16 @@
                 </div>
             </div>
 
-            {% if authorize %}
+
             <div>
                 <div class="mobile_menu_profile_button"><span><i class="bi bi-person">
 
                 </i>Профиль <span class="badge d-none"></span></span><i class="bi bi-chevron-right"></i></div>
 
             </div>
-            {% else %}
+
             <div><a href="/login"><i class="bi bi-person"></i><span>Войти</span></a></div>
-            {% endif %}
+
 
             <div><a href="/favorites"><i class="bi bi-heart"></i><span>Избранное</span></a></div>
             <div><a href="/create_ad"><i class="bi bi-plus-circle"></i><span>Добавить объявление</span></a></div>
@@ -217,23 +217,6 @@
             <div class="badge badge_favorites d-none"></div>
         </a>
     </div>
-    <div>
-        {% if authorize %}
-        <div class="bottom_item_profile_mobile">
-            <div class="mobile_menu_bottom_item_icon">
-                <div class="card_user_avatar_mobile">{{ client_name[0] }}</div>
-            </div>
-            <div class="mobile_menu_bottom_item_text">Профиль</div>
-            <div class="badge d-none"></div>
-        </div>
-        {% else %}
-        <a href="/login">
-            <div class="mobile_menu_bottom_item_icon"><i class="fas fa-user-circle"></i></div>
-            <div class="mobile_menu_bottom_item_text">Войти</div>
-        </a>
-        {% endif %}
-
-    </div>
 </div>
 
 <div id="profile_bottom-sheet" class="bottom_sheet">
@@ -241,24 +224,24 @@
     <div class="bottom_sheet_content">
         <div class="card-body">
 
-            <div class="card_user_avatar">{{ client_name[0] }}</div>
-            <div class="card_user_name">{{ client_name }}</div>
-            <div class="card_user_email"><i class="bi bi-envelope"></i>{{ client_email }}
-                {% if (google_client == 1) or (verified_email == 1) %}
+            <div class="card_user_avatar">  </div>
+            <div class="card_user_name">  </div>
+            <div class="card_user_email"><i class="bi bi-envelope"></i>
+
                 <i class="bi bi-patch-check-fill"></i>
-                {% else %}
+                 else
                 <i class="bi bi-patch-minus"></i>
                 <button type="button" onclick="profile_confirm_email();"
                         class="btn btn-primary">Подтвердить
                 </button>
-                {% endif %}
+                 endif
                 <div class="alert alert-danger ms-3 me-3" role="alert" id="profile_confirm_email_alert"
                      style="display: none;"></div>
             </div>
             <div class="card_user_phone">
-                <i class="bi bi-telephone"></i>{{ phone_number }}
-                {% if google_client and not phone_number %}
-                При авторизации через google, номер телефона отсутствует {% endif %}
+                <i class="bi bi-telephone"></i> phone_number
+
+                При авторизации через google, номер телефона отсутствует  endif
             </div>
             <div>
                 <a class="nav-link" href="url_for('public.edit_profile')">Редактировать
@@ -269,8 +252,8 @@
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item"><a class="nav-link"
                                         href="url_for('public.my_ads')">Мои объявления
-                    <div class="badge {% if warning_violation_amount == 0 %}d-none{% endif %}">
-                        {{ warning_violation_amount }}
+                    <div class="badge">
+                        warning_violation_amount
                     </div>
                 </a></li>
                 <li class="nav-item"><a class="nav-link" href="url_for('public.create_ad')">

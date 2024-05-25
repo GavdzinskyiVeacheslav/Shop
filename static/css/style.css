@@ -52,8 +52,8 @@ ul.pagination {margin: 10px 0;}
 .page-item .page-link i {font-size:12px}
 .page-item .page-link .bi:before {font-weight:bolder !important}
 .page-item:not(:first-child) .page-link {  margin-left: 0;}
-.page-item .page-link:hover {  z-index: 2;  color: #0067fe;  background-color: #f5f7f9;}
-.page-item.active .page-link:hover {  z-index: 2;  color: #fff;  background-color: #0067fe;}
+.page-item .page-link:hover {  z-index: 2;  color: #00C322;  background-color: #f5f7f9;}
+.page-item.active .page-link:hover {  z-index: 2;  color: #fff;  background-color: #00C322;}
 .page-item.active .page-link {  color: #fff;}
 .page-item.disabled a {color: #999;}
 .ads_filters {display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: space-between;align-items: center;margin-bottom:20px;}

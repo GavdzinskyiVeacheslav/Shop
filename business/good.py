@@ -105,5 +105,10 @@ class Good(object):
     # STATICMETHODS #
     @staticmethod
     def all_goods_ids():
-        """Список всех категорий"""
+        """Список всех айдишников товаров"""
         return dao.all_goods_ids()
+
+    @staticmethod
+    def good_ids_by_search(search=''):
+        """Список айдишников товаров по поиску"""
+        return dao.good_ids_by_search(search=search)
