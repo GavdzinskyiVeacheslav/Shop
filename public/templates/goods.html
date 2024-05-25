@@ -1,4 +1,19 @@
 {% extends '/layout.html' %}
+
+{% block specific_header %}
+<script src="/static/js/goods.js" defer></script>
+<script src="/static/js/control.js" defer></script>
+<style>
+    {% if current_category %}
+        .mobile_bottom_categories_button a {color: #0095da;}
+        .mobile_bottom_categories_button .mobile_menu_bottom_item_icon i {color: #0095da;}
+    {% else %}
+        .bottom_item_home_mobile a {color: #0095da;}
+        .bottom_item_home_mobile .mobile_menu_bottom_item_icon i {color: #0095da;}
+    {% endif %}
+</style>
+{% endblock specific_header %}
+
 {% block body %}
 <main>
     <div class="container">

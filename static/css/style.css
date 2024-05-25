@@ -12,7 +12,7 @@ h2 {margin-bottom:1.5rem;}
 .alert.alert-info {border-radius:10px;}
 a.bottom_item_profile_desk {display:block;}
 .bottom_item_profile_mobile {display:none;}
-.btn-primary {--bs-btn-bg: var(--bs-primary);--bs-btn-hover-bg:#008bcb;--bs-btn-active-bg:#008bcb;border: none;padding: 10px 20px;}
+.btn-primary {--bs-btn-bg: var(--bs-primary);--bs-btn-hover-bg:#00C322;--bs-btn-active-bg:#008bcb;border: none;padding: 10px 20px;}
 .btn:hover {background:var(--bs-btn-hover-bg);}
 .btn-outline-primary {--bs-btn-border-color: var(--bs-blue);--bs-btn-hover-bg: var(--bs-blue);--bs-btn-active-bg: var(--bs-blue);--bs-btn-active-border-color: var(--bs-blue);--bs-btn-hover-border-color: var(--bs-blue);color: var(--bs-blue);padding: 10px 20px;}
 button {outline:none !important;}
@@ -147,14 +147,14 @@ header .top-menu .search_clear_button {display:none;top: 0;right: 45px;position:
 header .top-menu .search_clear_button i {box-sizing: border-box;padding: 3px;border-radius: 5px;display: inline-block;width: 18px;height: 18px;font-size: 13px;color: #787878;}
 header .top-menu .search_clear_button:hover i {color:#111;}
 header .top-menu button.search_button {background: none;color: #181C32;border-radius: 8px !important;position: absolute;right: 0;top: 0;height: 100%;width: 50px;}
-header .top-menu button.search_button:hover {color:#0095da;background:none;}
+header .top-menu button.search_button:hover {color:#00C322;background:none;}
 header .top-menu .search .search-city {flex-wrap: nowrap;}
 header .top-menu .user_panel {min-width: 280px;padding-left: 20px;line-height:1;}
 header .top-menu .user_panel ul {display: flex;padding: 0;justify-content: space-between;align-items: center;flex-wrap: nowrap;flex-direction: row;list-style: none;}
 header .top-menu .user_panel ul li {text-align:center;margin: 0 !important;position:relative;}
 header .drop-content .col-3 {margin-bottom: 20px;}
 .user_panel ul a {color:#181C32;text-decoration:none;}
-.user_panel ul a:hover {color:#0095da;}
+.user_panel ul a:hover {color:#00C322;}
 .user_panel .search_block {display:none;}
 .user_panel_icon {font-size: 22px;margin-bottom: 5px;height:22px;}
 .user_panel .badge {position: absolute;top: -5px;left: calc(50% + 5px);}
@@ -1655,4 +1655,8 @@ article.border_pink {border-color: #ef417c !important;}
     .product {
         flex: 1 1 100%;
     }
+}
+
+.column.col-auto h1 a img {
+    margin-top: -25px; /* отступ сверху, может быть отрицательным для подъема */
 }

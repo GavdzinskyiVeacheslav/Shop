@@ -14,10 +14,13 @@ from utils.common import parse_int, categories_sections_list
 def goods():
     """Главная страница с товарами"""
 
-    # all_goods_ids = Good.all_goods_ids()
-    # goods_list = [Good(good_id=good_id) for good_id in all_goods_ids]
+    all_goods_ids = Good.all_goods_ids()
+    goods_list = [Good(good_id=good_id) for good_id in all_goods_ids]
 
-    goods_list = range(1, 100)
+    # goods_list = range(1, 100)
+
+    # Категории и разделы
+    categories, sections = categories_sections_list()
 
     return render_template(
         '/goods.html',
@@ -28,8 +31,8 @@ def goods():
         verified_email=1,
         google_client=0,
         authorize=session.get('client.logged_in', None),
-        # categories=categories,
-        # sections=sections,
+        categories=categories,
+        sections=sections,
         city_ids=[],
         current_year=datetime.now().year,
         # records_per_page=records_per_page,
