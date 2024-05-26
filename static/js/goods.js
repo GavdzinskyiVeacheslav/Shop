@@ -166,3 +166,40 @@ function expandAdDesc() {
 $(document).ready(function () {
     // Вызовы функций
 });
+
+// Описание при наведении
+function hover(good_id=0) {
+    const product = $('#product_' + good_id);
+}
+// Получаем все элементы с классом "product"
+const products = ;
+
+// Проходимся по каждому товару
+//products.forEach(product => {
+// Находим описание товара внутри текущего товара
+const description = product.querySelector('.description');
+
+// Добавляем обработчик события для наведения мыши
+product.addEventListener('mouseenter', () => {
+// Показываем описание товара
+description.classList.remove('hidden');
+
+// Увеличиваем размер текущего товара
+product.style.transform = "scale(1.05)";
+
+// Уменьшаем размер соседних товаров
+//        let siblings = Array.from(product.parentElement.children).filter(e => e !== product);
+//        siblings.forEach(sibling => {
+//            sibling.style.transform = "scale(1)";
+//        });
+});
+
+// Добавляем обработчик события для ухода мыши
+product.addEventListener('mouseleave', () => {
+// Скрываем описание товара
+description.classList.add('hidden');
+
+// Возвращаем размер текущего товара к исходному состоянию
+product.style.transform = "scale(1)";
+});
+});

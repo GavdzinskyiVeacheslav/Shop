@@ -24,12 +24,15 @@ def goods():
     # Все айдишники товаров из базы
     all_goods_ids = Good.all_goods_ids()
 
+    # Для теста
+    # amount = range(1, 25)
+
     # Получить список айдишников товаров, соответствующих поисковому запросу
     good_ids_after_search = get_good_ids_after_search(search, all_goods_ids)
 
     # Страница и кол. объявлений на странице для пагинации
     page = parse_int(request.args.get("p", 1))
-    final_list_ids = paginate_goods(good_ids_after_search, page)
+    final_list_ids = paginate_goods(all_goods_ids, page)
 
     # Собрать объекты из айдишников
     final_list = [Good(good_id=good_id) for good_id in final_list_ids]

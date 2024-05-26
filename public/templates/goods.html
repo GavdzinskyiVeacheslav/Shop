@@ -19,12 +19,23 @@
     <div class="container">
         <div class="product-grid">
             {% for good in goods_list %}
-            <div class="product">
-                <img src="/static/pictures/image1.webp" alt="Product 1">
+            <div class="product" id="product_{{ good.id }}">
+                <img src="/static/pictures/korgi.jpeg" alt="нет картинки">
                 <h2>{{ good.name }}</h2>
                 <p class="price">${{ good.price }}</p>
-                <p class="description">{{ good.description }}</p>
-                <button>Купить</button>
+                <p class="description hidden">{{ good.description }}</p>
+                    <p class="existence">
+                        {% if good.existence == 1 %}
+                            <span class="in-stock">
+                                <i class="bi bi-check-circle-fill"></i> Є в наявності
+                            </span>
+                        {% else %}
+                            <span class="out-of-stock">
+                                <i class="bi bi-x-circle-fill"></i> Немає в наявності
+                            </span>
+                        {% endif %}
+                    </p>
+                <button class="btn_buy"><i class="bi bi-cart3"></i>Купить</button>
             </div>
             {% endfor %}
         </div>

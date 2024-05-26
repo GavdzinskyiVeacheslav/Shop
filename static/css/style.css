@@ -1662,7 +1662,7 @@ article.border_pink {border-color: #ef417c !important;}
 }
 
 
-/* STAS */
+/* footer */
 
 .container_father_footer {
     display: flex;
@@ -1714,4 +1714,130 @@ article.border_pink {border-color: #ef417c !important;}
     display: inline-block;
     width: 10px;
     margin-right: 5px;
+}
+
+/* goods */
+
+/* Базовый стиль для кнопки */
+.product .btn_buy {
+   background: #007F16;
+   color: #fff;
+   padding: 9px 17px;
+   border-radius: 10px;
+   transition: all 500ms ease;
+   border: none;
+   cursor: pointer;
+   font-weight: bold;
+}
+
+/* Стиль при наведении */
+.product .btn_buy:hover {
+   background: #00C322;
+}
+
+
+/* Отступ между иконкой и текстом */
+.product .btn_buy .bi-cart3 {
+    margin-right: 8px; /* Настройте отступ по вашему вкусу */
+}
+
+.product {
+    border-radius: 20px;
+}
+
+/* стили для характеристики - наличие */
+
+.in-stock {
+    color: green;
+    font-weight: bold;
+}
+
+.out-of-stock {
+    color: red;
+    font-weight: bold;
+}
+
+.in-stock i, .out-of-stock i {
+    margin-right: 5px; /* Отступ справа от иконки */
+    font-size: 1.2em;  /* Размер иконки */
+}
+
+.product img{
+    border-radius: 20px;
+}
+
+/* Отступ центрирование */
+
+.product {
+    background-color: #f9f9f9;
+    padding: 40px; /* Отступы внутри карточки продукта */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: calc(33.333% - 20px); /* Ширина карточки продукта, минус отступ */
+    box-sizing: border-box; /* Учитываем padding в ширину элемента */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:10px; /* Увеличение отступа сверху */
+    margin-bottom: 10px; /* Увеличение отступа снизу */
+}
+
+.product img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.product h2 {
+    margin: 15px 0;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.product .price, .product .description, .product .existence {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.product .price {
+    font-size: 1.5em; /* Размер шрифта равен размеру заголовка */
+}
+
+/* Обводка и сердечко */
+
+.product {
+    border: 1px solid #ddd; /* Обводка по умолчанию */
+    transition: box-shadow 0.3s; /* Плавный переход для тени */
+    position: relative; /* Для позиционирования псевдоэлемента */
+}
+
+.product::before {
+    content: "\2665"; /* Код Unicode для символа сердечка */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 35px; /* Увеличение размера иконки */
+    color: transparent; /* Прозрачный цвет сердечка */
+    transition: color 0.3s; /* Плавный переход цвета сердечка */
+}
+
+.product:hover::before {
+    color: #00aa00; /* Зеленый цвет сердечка при наведении */
+}
+
+
+.product {
+    transition: all 0.3s ease;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* добавляем тень по умолчанию */
+    border-color: #00aa00; /* цвет обводки по умолчанию */
+}
+
+.product:hover {
+    box-shadow: 0px 0px 20px rgba(0, 128, 0, 0.3); /* увеличиваем тень при наведении */
+    border-color: green; /* меняем цвет обводки при наведении */
+}
+
+.hidden {
+    display: none !important; /* Если необходимо, чтобы стиль имел наивысший приоритет */
 }
