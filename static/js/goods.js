@@ -199,3 +199,5 @@ function end_hover(good_id) {
         $product.css('transform', 'scale(1)');
     });
 }
+
+

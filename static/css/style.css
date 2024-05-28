@@ -1780,7 +1780,8 @@ article.border_pink {border-color: #ef417c !important;}
     flex-direction: column;
     align-items: center;
     margin-top:10px; /* Увеличение отступа сверху */
-    margin-bottom: 10px; /* Увеличение отступа снизу */
+    margin-bottom: 1
+    0px; /* Увеличение отступа снизу */
 }
 
 .product img {
@@ -1840,3 +1841,39 @@ article.border_pink {border-color: #ef417c !important;}
 .hidden {
     display: none !important; /* Если необходимо, чтобы стиль имел наивысший приоритет */
 }
+
+
+/* socialnetworks*/
+
+.socialnetworks {
+    display: flex;
+    align-items: center; /* Выравниваем элементы по центру по вертикали */
+    list-style-type: none;
+    padding: 0;
+}
+
+.socialnetworks li {
+    margin-right: 10px; /* Расстояние между иконками */
+}
+
+.socialnetworks li:last-child {
+    margin-right: 0; /* Убираем отступ у последней иконки */
+}
+
+.socialnetworks .socialnetworks_anastasia li {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 30px; /* Ширина иконок */
+    height: 30px; /* Высота иконок */
+    border: none; /* Убираем контур */
+}
+
+.socialnetworks li a svg {
+    width: 100%; /* Заполнение иконки внутри ссылки */
+    height: 100%;
+    fill: #ffffff; /* Цвет иконок */
+}
+
+
+

@@ -21,10 +21,10 @@
             {% for good in goods_list %}
             <div class="product" id="product_{{ good.id }}"
                 onmouseenter="start_hover({{ good.id }});" onmouseleave="end_hover({{ good.id }});">
-                <img src="/static/pictures/image3.webp" alt="Нет картинки">
+                <img src="/static/pictures/korgi.jpeg" alt="Нет картинки">
                 <h2>{{ good.name }}</h2>
                 <p class="price">${{ good.price }}</p>
-                <p class="description" style="display: none;">{{ good.description }}</p>
+                <p class="description" style="display: none;">{{ good.description[0:100] }}....</p>
                     <p class="existence">
                         {% if good.existence == 1 %}
                             <span class="in-stock">
