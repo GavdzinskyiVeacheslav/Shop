@@ -1,6 +1,7 @@
 from flask import Flask
 
 from public.routes import public_bp
+from control.routes import control_bp
 from utils.config import get_config
 
 # Инициализация приложения
@@ -10,6 +11,7 @@ app = Flask(
 
 # Регистрация Блюпринта
 app.register_blueprint(public_bp, url_prefix='/')
+app.register_blueprint(control_bp, url_prefix='/control')
 # Secret key
 app.secret_key = get_config()['secret_key'].get('key', "")
 

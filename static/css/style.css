@@ -359,7 +359,7 @@ form label.col-3 {color:#6c757d;font-size:15px;font-weight:normal;margin-bottom:
 
 form {position:relative;}
 form .form-control, form .form-select {font-size: 16px;padding: 8px 12px;}
-.add_photo_label {cursor: pointer;border: 1px solid #cfd4da;border-radius: 5px;text-align: center;display: flex;flex-direction: column;flex-wrap: nowrap;justify-content: center;width: calc(25% - 10px);height: auto;margin: 0 10px 10px 0;aspect-ratio: 1/1;}
+.add_photo_label {cursor: pointer;border: 1px solid #cfd4da;border-radius: 5px;text-align: center;display: flex;flex-direction: column;flex-wrap: nowrap;justify-content: center;height: auto;margin: 0 10px 10px 0;aspect-ratio: 1/1;}
 .add_photo_label:hover {border-color:#0095da;color:#0095da !important;}
 .add_photo_label i {font-size:30px;}
 .create_ad_photos_block {display: flex;flex-direction: row;flex-wrap: wrap;}
@@ -1853,7 +1853,7 @@ article.border_pink {border-color: #ef417c !important;}
 }
 
 .socialnetworks li {
-    margin-right: 10px; /* Расстояние между иконками */
+    margin-right: 0px; /* Расстояние между иконками */
 }
 
 .socialnetworks li:last-child {
@@ -1864,7 +1864,6 @@ article.border_pink {border-color: #ef417c !important;}
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    width: 30px; /* Ширина иконок */
     height: 30px; /* Высота иконок */
     border: none; /* Убираем контур */
 }
@@ -1875,5 +1874,13 @@ article.border_pink {border-color: #ef417c !important;}
     fill: #ffffff; /* Цвет иконок */
 }
 
+.socialnetworks_anastasia li:first-child {
+    margin-left: 0; /* Убираем отступ слева только у первого элемента */
+}
 
-
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Это центрирует контент вертикально по центру страницы */
+}
