@@ -19,11 +19,12 @@
     <div class="container">
         <div class="product-grid">
             {% for good in goods_list %}
-            <div class="product" id="product_{{ good.id }}">
-                <img src="/static/pictures/korgi.jpeg" alt="нет картинки">
+            <div class="product" id="product_{{ good.id }}"
+                onmouseenter="start_hover({{ good.id }});" onmouseleave="end_hover({{ good.id }});">
+                <img src="/static/pictures/image3.webp" alt="Нет картинки">
                 <h2>{{ good.name }}</h2>
                 <p class="price">${{ good.price }}</p>
-                <p class="description hidden">{{ good.description }}</p>
+                <p class="description" style="display: none;">{{ good.description }}</p>
                     <p class="existence">
                         {% if good.existence == 1 %}
                             <span class="in-stock">
