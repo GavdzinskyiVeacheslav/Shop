@@ -29,3 +29,11 @@ class Good:
     description: str = ''
     price: float = 0.0
     existence: int = 0
+
+
+@dataclass
+class Photo:
+    id: int = 0
+    good_id: int = 0
+    width: int = 0
+    height: int = 0
