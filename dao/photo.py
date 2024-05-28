@@ -44,8 +44,9 @@ def update(photo: Photo):
             good_id = %s, 
             width = %s,
             height = %s
+            WHERE id    = %s
         """,
-        params=([getattr(photo, field) for field in ['good_id', 'width', 'height']]),
+        params=([getattr(photo, field) for field in ['good_id', 'width', 'height', 'id']]),
     )
     return affected
 
@@ -64,14 +65,16 @@ def delete(photo_id):
     return affected
 
 
-def all_photos_ids():
+def all_photo_items_by_good(good_id=0):
+    condition = f'good_id = {good_id}' if good_id else '1'
     rows = db.db_statement(
         statement_type='List',
         sql=f"""
-            SELECT id
+            SELECT id, good_id, width, height
             FROM photos
-            ORDER BY id DESC 
+            WHERE {condition}
+            ORDER BY id
         """,
         params=()
     )
-    return [row['id'] for row in rows]
+    return [Photo(**row) for row in rows]

@@ -12,6 +12,7 @@ class Good(object):
         self.__price = dto.price if dto else None
         self.__existence = dto.existence if dto else None
         self.__add_date = dto.add_date if dto else None
+        self.__picture = None
         if good_id:
             self.__reload(good_id)
 

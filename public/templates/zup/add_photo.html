@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить фото</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/static/fav.ico">
+    <!-- CSS -->
+    <link rel="preload" href="/static/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/static/css/bs.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/static/css/bootstrap-icons.css" as="style"
+          onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/static/css/cropper.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/css/cropper.min.css"/></noscript>
+    <!-- JS -->
+    <script src="/static/js/jquery-3.6.0.min.js" defer></script>
+    <script src="/static/js/bootstrap.bundle.min.js" defer></script>
+    <script src="/static/js/jquery.cookie.min.js" defer></script>
+    <script src="/static/js/main.js" defer></script>
+    <script src="/static/js/control.js" defer></script>
+    <script src="/static/js/cropper.min.js" defer></script>
+    <script src="/static/js/picture_cropping.js" defer></script>
+    <script src="/static/js/zup.js" defer></script>
+    <script src="/static/js/goods.js" defer></script>
+</head>
+<body>
+<div class="row mb-4">
+    <label class="form-label column col-3">Фото (10 макс.)</label>
+    <div class="column col-9">
+        <div>
+            <br><br>
+            <label for="good_id"> ID Товара:
+                <input type="number" id="good_id">
+            </label>
+            <br><br>
+        </div>
+        <div class="create_ad_photos_block">
+            <div id="AllPhotos" class="d-flex">
+
+
+                <label class="add_photo_label">
+                    <div><i class="bi bi-camera"></i></div>
+                    <div>Добавить фото</div>
+                    <input class="form-control mb-2" name="ad_photo" type="file" accept="image/*" id="show_picture"
+                           style="display:none;">
+                </label>
+            </div>
+            <div class="AllPhotosMaxMessage">Вы добавили максимальное количество изображений</div>
+        </div>
+        <div class="alert alert-danger mb-2" role="alert" id="WrongImageSizeAlert"
+             style="display: none;">
+            Размеры изображения меньше разрешённых размеров
+        </div>
+        <div class="d-flex justify-content-start">
+            <button type="button" class="btn btn-primary" id="add_ad_button" onclick="add_photo();">Добавить
+                Фото <img src="/static/images/spinner.gif" class="button_spinner"/>
+            </button>
+            <div class="alert alert-danger ms-2 me-2" role="alert" id="add_photos_alert" style="display: none;"></div>
+        </div>
+    </div>
+</div>
+
+<!--Диалог обработки картинки-->
+<div class="modal fade" id="image_crop_modal_show_picture" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title">Выберите область изображения</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container mb-3">
+                    <img id="crop_image_show_picture" src="" class="mw-100">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="image_crop_button" onclick="ShowCroppedImage();">                    Применить
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Шаблон для добавляемого изображения-->
+<div id="PhotoContainer" class="photo_container">
+    <div id="CroppedPhoto" data-existing_photo>
+        <input type="hidden" id="CanvasImage" name="CanvasImage" class="CanvasImage">
+    </div>
+    <div id="DeleteCropButton">
+        <button type="button" class="btn btn-sm btn-delete delete_crop_button" title="Удалить">
+            <i class="bi bi-trash"></i>
+        </button>
+    </div>
+</div>
+</body>
+</html>

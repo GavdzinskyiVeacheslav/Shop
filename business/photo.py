@@ -41,12 +41,8 @@ class Photo(object):
         return self.__height
 
     @property
-    def picture_preview(self):
-        return picture_utils.picture_url(item_id=self.__id, preview=False)
-
-    @property
     def picture(self):
-        return picture_utils.picture_url(item_id=self.__id, preview=False)
+        return picture_utils.picture_url(item_id=self.__id)
 
         # CRUD #
 
@@ -56,14 +52,13 @@ class Photo(object):
         new_id = dao.create(dto)
         dto.id = new_id
         self.__reload(new_id)
-        return True
+        return new_id
 
     def update(self, **params):
         """Изменение записи в БД"""
         dto = dao.get(self.__id)
         if dto is None:
             return None
-        dto.id = params.get('id', dto.id)
         dto.good_id = params.get('good_id', dto.good_id)
         dto.width = params.get('width', dto.width)
         dto.height = params.get('height', dto.height)
@@ -86,6 +81,6 @@ class Photo(object):
 
     # STATICMETHODS #
     @staticmethod
-    def all_photos_ids():
-        """Список всех айдишников товаров"""
-        return dao.all_photos_ids()
+    def all_photo_items_by_good(good_id=0):
+        """Список объектов всех фотографий конкретного товара"""
+        return [Photo(dto=dto) for dto in dao.all_photo_items_by_good(good_id=good_id)]

@@ -1,0 +1,35 @@
+<img id="size_test_image" src="" class="d-none">
+
+<!--Диалог обработки картинки-->
+<div class="modal fade" id="image_crop_modal_show_picture" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title">Выберите область изображения</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container mb-3">
+                    <img id="crop_image_show_picture" src="" class="mw-100">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="image_crop_button" onclick="ShowCroppedImage();">                    Применить
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Шаблон для добавляемого изображения-->
+<div id="PhotoContainer" class="photo_container">
+    <div id="CroppedPhoto" data-existing_photo>
+        <input type="hidden" id="CanvasImage" name="CanvasImage" class="CanvasImage">
+    </div>
+    <div id="DeleteCropButton">
+        <button type="button" class="btn btn-sm btn-delete delete_crop_button" title="Удалить">
+            <i class="bi bi-trash"></i>
+        </button>
+    </div>
+</div>
