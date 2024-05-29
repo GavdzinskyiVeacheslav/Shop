@@ -606,29 +606,32 @@ $(document).mouseup( function(e){ // событие клика по веб-до�
 
 });
 
+//======================================================================================================================
+// Очистить поле поиска
+//======================================================================================================================
 function clear_search() {
     $('#search_request').val('');
     $('.search_clear_button').css('display','none');
     $('#search_request').focus();
 }
 
-function clear_search_city() {
-    $('#search_city_input').val('');
-    $('.search_city_clear_button').css('display','none');
-    $('#search_city_input').focus();
-    $( ".city_div" ).each(function() {
-                $( this ).css('display','block');
-            });
-}
+//function clear_search_city() {
+//    $('#search_city_input').val('');
+//    $('.search_city_clear_button').css('display','none');
+//    $('#search_city_input').focus();
+//    $( ".city_div" ).each(function() {
+//                $( this ).css('display','block');
+//            });
+//}
 
-function setSpecialVersion(special){
-    $.post('/set_special', {
-        special_version: special
-    }, function(result) {
-    if(result.ok){
-        document.cookie = "ads_visual=list;path=/";
-        document.location.reload();
-    }
-
-    });
-}
+//function setSpecialVersion(special){
+//    $.post('/set_special', {
+//        special_version: special
+//    }, function(result) {
+//    if(result.ok){
+//        document.cookie = "ads_visual=list;path=/";
+//        document.location.reload();
+//    }
+//
+//    });
+//}

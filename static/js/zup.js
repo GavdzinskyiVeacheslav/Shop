@@ -24,7 +24,7 @@ async function add_photo() {
     formData.append("good_id", $("#good_id").val());
     formData.append("photos", imageBlob);
 
-    let response = await fetch('/add_photo', {
+    let response = await fetch('/control/add_photo', {
         method: 'POST',
         body: formData
     });
@@ -54,7 +54,7 @@ function set_file_input_disabled() {
 }
 
 //======================================================================================================================
-//
+// Инициализация события для кроппера
 //======================================================================================================================
 //fill_image_array();
 set_file_input_disabled();

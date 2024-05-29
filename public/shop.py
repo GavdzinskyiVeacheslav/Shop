@@ -1,4 +1,3 @@
-import base64
 from datetime import datetime
 
 from flask import render_template, request
@@ -6,9 +5,8 @@ from flask import render_template, request
 from business.good import Good
 from business.photo import Photo
 from public.routes import public_bp
-from utils import picture_utils
-from utils.common import parse_int, categories_sections_list, cut_inject, RECORDS_PER_PAGE, get_good_ids_after_search, \
-    paginate_goods, generate_pagination, return_success, process_param, return_error
+from utils.common import (parse_int, categories_sections_list, cut_inject, RECORDS_PER_PAGE, get_good_ids_after_search,
+                          paginate_goods, generate_pagination)
 
 
 @public_bp.route("/")
@@ -57,5 +55,4 @@ def goods():
         records_per_page=RECORDS_PER_PAGE,
         current_page=page,
         pagination=generate_pagination(all_goods_ids, page, final_list),
-
     )
