@@ -1884,3 +1884,28 @@ article.border_pink {border-color: #ef417c !important;}
     align-items: center;
     height: 100vh; /* Это центрирует контент вертикально по центру страницы */
 }
+
+.bread_crumbs {
+    list-style-type: none;
+}
+
+.bread_crumbs li a {
+    margin-right: 10px;
+    padding: 0px;
+}
+
+.bread_crumbs li a:first-child {
+    margin-left: 0; /* Убираем отступ слева только у первого элемента */
+}
+
+.bread_crumbs li a:hover{
+    color:#00C322;
+}
+
+/* Стили по умолчанию для логотипа */
+.mobile_menu_block_header img {
+    width: 400px; /* Исходная ширина */
+    height: 100px; /* Исходная высота */
+}
+
+
