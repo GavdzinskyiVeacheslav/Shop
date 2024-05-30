@@ -47,6 +47,9 @@ def add_photo():
                 with open(picture_path, 'wb') as file:
                     file.write(base64.b64decode(photo))
 
+                # Preview
+                picture_utils.save_preview(item_id=picture_id)
+
                 # Получаем ширину и высоту из одной функции Pillow
                 width, height = picture_utils.get_picture_sizes(item_id=picture_id)
 

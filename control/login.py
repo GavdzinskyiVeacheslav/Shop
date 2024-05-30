@@ -1,8 +1,9 @@
 from functools import wraps
 
-from flask import session, redirect, url_for, request, render_template
+from flask import session, redirect, url_for, request, render_template, flash
 
 from control.routes import control_bp
+from utils.config import get_config
 
 
 def check_logged_in():
@@ -24,13 +25,34 @@ def check_logged_in():
 
 @control_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    """Форма логина"""
     if request.method == 'POST':
-        if request.form.get('employee_name', '') == 'Вася':
-            if request.form.get('password', '') == '123':
+        # Проверяем имя
+        if request.form.get('employee_name', '') == get_config()['auth'].get('name', ''):
+            # Проверяем пароль
+            if request.form.get('password', '') == get_config()['auth'].get('password', ''):
+                # Записываем в flask-сессию
                 session['admin'] = 'admin'
+            # Неправильный пароль
+            else:
+                flash('Неправильный пароль', 'error')
+        # Неправильное имя
+        else:
+            flash('Неправильное имя', 'error')
 
+        # Всё совпало - продолжаем программу и редирект в защищённую зону
         return redirect(url_for('control.add_photo'))
 
+    # GET
     return render_template(
         '/control/login.html',
     )
+
+
+@control_bp.route('/logout')
+def logout():
+    """Выход из системы"""
+    # Убрать из сессии
+    session.pop('admin', None)
+    # Редирект на логин
+    return redirect(url_for('control.login'))

@@ -1,7 +1,7 @@
 {% extends '/control/layout.html' %}
 
 {% block login %}
-<div class="d-flex vw-100 vh-100 align-items-center justify-content-center container">
+<div class="d-flex vw-100 vh-100 align-items-center justify-content-center">
     <div class="row">
         <div class="col-auto">
             <div class="border">
@@ -18,6 +18,15 @@
                             <label for="login_password" class="form-label">Пароль</label>
                             <input type="password" class="form-control" id="login_password" name="password">
                         </div>
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                        <ul>
+                            {% for category, message in messages %}
+                            <li class="{{ category }}">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        {% endwith %}
                     </div>
                     <div class="border-top p-2 d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary">Вход</button>

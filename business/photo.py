@@ -41,10 +41,14 @@ class Photo(object):
         return self.__height
 
     @property
-    def picture(self):
-        return picture_utils.picture_url(item_id=self.__id)
+    def picture_preview(self):
+        return picture_utils.picture_url(item_id=self.__id, preview=True)
 
-        # CRUD #
+    @property
+    def picture(self):
+        return picture_utils.picture_url(item_id=self.__id, preview=False)
+
+    # CRUD #
 
     def insert(self, **params):
         """Добавление записи в БД"""
