@@ -24,8 +24,8 @@
             {% for good in goods_list %}
             <div class="product" id="product_{{ good.id }}"
                 onmouseenter="start_hover({{ good.id }});" onmouseleave="end_hover({{ good.id }});">
-                <img src="{% if good.photos %}/static/{{ good.photos[0].picture }}{% endif %}"
-                     alt="Нет картинки">
+                <img src="{% if good.photos %}/static/{{ good.photos[0].picture }}{% else %}/static/images/default-image.jpg{% endif %}"
+                     alt="{{ good.name }}">
                 <h2>{{ good.name }}</h2>
                 <p class="price">${{ good.price }}</p>
                 <p class="description" style="display: none;">{{ good.description[0:100] }}....</p>

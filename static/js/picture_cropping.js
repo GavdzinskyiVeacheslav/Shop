@@ -1,7 +1,7 @@
 let sizeTestImage;
 var images_array = [];
-var minImageWidth = 300;
-var minImageHeight = 300;
+var minImageWidth = 564;
+var minImageHeight = 564;
 
 //======================================================================================================================
 // Функция асинхронная, так как загрузка занимает время
