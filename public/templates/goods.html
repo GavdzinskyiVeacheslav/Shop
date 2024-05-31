@@ -18,6 +18,9 @@
 <main>
     <div class="container">
         <div class="product-grid">
+            {% if not goods_list %}
+            <h3>Товары не найдены</h3>
+            {% endif %}
             {% for good in goods_list %}
             <div class="product" id="product_{{ good.id }}"
                 onmouseenter="start_hover({{ good.id }});" onmouseleave="end_hover({{ good.id }});">

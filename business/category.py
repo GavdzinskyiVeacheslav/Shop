@@ -43,8 +43,7 @@ class Category(object):
         """Список всех категорий"""
         return dao.all_categories()
 
-    # TODO написать dao метод
-    # @staticmethod
-    # def get_category_by_folder(category_folder=''):
-    #     """Поиск категории по коду"""
-    #     return dao.get_category_by_folder(category_folder=category_folder)
+    @staticmethod
+    def get_category_by_folder(category_folder=''):
+        """Поиск категории по коду"""
+        return dao.get_category_by_folder(category_folder=category_folder)

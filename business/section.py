@@ -49,8 +49,7 @@ class Section(object):
         """Список разделов конкретной категории"""
         return [Section(dto=dto) for dto in dao.list_section_by_category(category_id=category_id)]
 
-    # TODO написать dao метод
-    # @staticmethod
-    # def get_section_by_folder(section_folder=''):
-    #     """Поиск раздела по коду"""
-    #     return dao.get_section_by_folder(section_folder=section_folder)
+    @staticmethod
+    def get_section_by_folder(section_folder=''):
+        """Поиск раздела по коду"""
+        return dao.get_section_by_folder(section_folder=section_folder)

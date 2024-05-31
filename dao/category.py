@@ -93,3 +93,22 @@ def get_by_category_name(category_name):
     category_model = Category()
     category_model.__dict__.update(row)
     return category_model
+
+
+def get_category_by_folder(category_folder=''):
+    row = db.db_statement(
+        statement_type='Row',
+        sql=f"""
+            SELECT id, name, description, folder
+            FROM categories 
+            WHERE folder = %s 
+        """,
+        params=(
+            category_folder,
+        )
+    )
+    if not row:
+        return None
+    category_model = Category()
+    category_model.__dict__.update(row)
+    return category_model

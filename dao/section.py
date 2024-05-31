@@ -108,3 +108,23 @@ def get_by_section_name(section_name):
     section_model = Section()
     section_model.__dict__.update(row)
     return section_model
+
+
+def get_section_by_folder(section_folder=''):
+    row = db.db_statement(
+        statement_type='Row',
+        sql=f"""
+            SELECT id, name, category_id, description, folder
+            FROM sections 
+            WHERE folder = %s 
+        """,
+        params=(
+            section_folder,
+        )
+    )
+    if not row:
+        return None
+    section_model = Section()
+    section_model.__dict__.update(row)
+    return section_model
+
