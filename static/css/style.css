@@ -181,7 +181,7 @@ li.drop-menu {width:180px;}
 .open_categories_menu i.closed_menu_i {display:inline-block;}
 .close_categories_menu i.opened_menu_i {display:inline-block;}
 .close_categories_menu i.closed_menu_i {display:none;}
-a.btn.open_categories_menu, a.btn.close_categories_menu {padding: 0;line-height:48px;font-weight: bold;width:100%;border-radius:8px;}
+a.btn.open_categories_menu, a.btn.close_categories_menu {margin-left: -10px;padding: 0;line-height:48px;font-weight: bold;width:100%;border-radius:8px;}
 .subcategory_div {margin-left: 15px;}
 
 .back_holder {display:none;background:rgba(0,0,0,0.3);position:fixed;left: 0;width: 100%;top: 130px;bottom:0;z-index:19;}
@@ -1750,12 +1750,12 @@ article.border_pink {border-color: #ef417c !important;}
 /* стили для характеристики - наличие */
 
 .in-stock {
-    color: green;
+    color: rgba(0, 128, 0, 0.7);
     font-weight: bold;
 }
 
 .out-of-stock {
-    color: red;
+    color: rgba(255, 0, 0, 0.5);
     font-weight: bold;
 }
 
@@ -1972,14 +1972,75 @@ article.border_pink {border-color: #ef417c !important;}
 
 /* Адаптивные стили */
 @media (max-width: 600px) {
-    .socialnetworks_mobile {
+
+/*     .socialnetworks_mobile {
         flex-direction: column;
     }
-
-    .socialnetworks_mobile li {
+*/
+/*    .socialnetworks_mobile li {
         margin: 10px 0;
     }
+*/
 }
 
+/* Контакты */
+.contact-block {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 7px;
+  max-width: 400px;
+  /* margin: 5px auto; */
+  box-shadow: 0px 0px 10px rgba(236, 106, 112, 0.9);
+  border-color: #c95a5f;
+}
 
+.contact-block h2 {
+  text-align: left;
+  color: #333;
+  margin-bottom: 20px;
+  padding-left: 2px;
+}
 
+.contact-block h3 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: left;
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #666;
+  padding-left: 2px;
+}
+
+.contact-item i {
+  font-size: 20px;
+  color: #007bff;
+  margin-right: 10px;
+}
+
+.contact-item span {
+  display: inline-block;
+}
+
+.contact-item:last-child {
+  margin-bottom: 3px;
+}
+
+.contact-item a {
+  color: #666;
+  text-decoration: none;
+}
+
+.contact-item a:hover {
+  color: #c95a5f;
+}
+
+.contact-item .phone-icon,
+.contact-item .location-icon {
+  color: #000; /* Черный цвет */
+}
