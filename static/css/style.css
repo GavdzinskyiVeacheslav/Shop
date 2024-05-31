@@ -12,7 +12,7 @@ h2 {margin-bottom:1.5rem;}
 .alert.alert-info {border-radius:10px;}
 a.bottom_item_profile_desk {display:block;}
 .bottom_item_profile_mobile {display:none;}
-.btn-primary {--bs-btn-bg: var(--bs-primary);--bs-btn-hover-bg:#00C322;--bs-btn-active-bg:#008bcb;border: none;padding: 10px 20px;}
+.btn-primary {--bs-btn-bg: var(--bs-primary);--bs-btn-hover-bg:#c95a5f;--bs-btn-active-bg:#008bcb;border: none;padding: 10px 20px;}
 .btn:hover {background:var(--bs-btn-hover-bg);}
 .btn-outline-primary {--bs-btn-border-color: var(--bs-blue);--bs-btn-hover-bg: var(--bs-blue);--bs-btn-active-bg: var(--bs-blue);--bs-btn-active-border-color: var(--bs-blue);--bs-btn-hover-border-color: var(--bs-blue);color: var(--bs-blue);padding: 10px 20px;}
 button {outline:none !important;}
@@ -52,8 +52,8 @@ ul.pagination {margin: 10px 0;}
 .page-item .page-link i {font-size:12px}
 .page-item .page-link .bi:before {font-weight:bolder !important}
 .page-item:not(:first-child) .page-link {  margin-left: 0;}
-.page-item .page-link:hover {  z-index: 2;  color: #00C322;  background-color: #f5f7f9;}
-.page-item.active .page-link:hover {  z-index: 2;  color: #fff;  background-color: #00C322;}
+.page-item .page-link:hover {  z-index: 2;  color: #c95a5f;  background-color: #f5f7f9;}
+.page-item.active .page-link:hover {  z-index: 2;  color: #fff;  background-color: #c95a5f;}
 .page-item.active .page-link {  color: #fff;}
 .page-item.disabled a {color: #999;}
 .ads_filters {display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: space-between;align-items: center;margin-bottom:20px;}
@@ -147,19 +147,19 @@ header .top-menu .search_clear_button {display:none;top: 0;right: 45px;position:
 header .top-menu .search_clear_button i {box-sizing: border-box;padding: 3px;border-radius: 5px;display: inline-block;width: 18px;height: 18px;font-size: 13px;color: #787878;}
 header .top-menu .search_clear_button:hover i {color:#111;}
 header .top-menu button.search_button {background: none;color: #181C32;border-radius: 8px !important;position: absolute;right: 0;top: 0;height: 100%;width: 50px;}
-header .top-menu button.search_button:hover {color:#00C322;background:none;}
+header .top-menu button.search_button:hover {color:#c95a5f;background:none;}
 header .top-menu .search .search-city {flex-wrap: nowrap;}
-header .top-menu .user_panel {min-width: 280px;padding-left: 20px;line-height:1;}
+header .top-menu .user_panel {min-width: 50px;padding-left: 20px;line-height:1;}
 header .top-menu .user_panel ul {display: flex;padding: 0;justify-content: space-between;align-items: center;flex-wrap: nowrap;flex-direction: row;list-style: none;}
 header .top-menu .user_panel ul li {text-align:center;margin: 0 !important;position:relative;}
 header .drop-content .col-3 {margin-bottom: 20px;}
 .user_panel ul a {color:#181C32;text-decoration:none;}
-.user_panel ul a:hover {color:#00C322;}
+.user_panel ul a:hover {color:#c95a5f;}
 .user_panel .search_block {display:none;}
 .user_panel_icon {font-size: 22px;margin-bottom: 5px;height:22px;}
 .user_panel .badge {position: absolute;top: -5px;left: calc(50% + 5px);}
 
-.top_menu {display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: flex-start;align-items: center;gap:30px;}
+.top_menu {display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: flex-start;align-items: center;gap:30px;margin-left: -20px;}
 .top_menu a {color:#181C32;font-size: 13px;text-decoration: none;}
 .special_version_block a {color:#181C32;font-size: 13px;text-decoration: none;}
 .top_menu a:hover {color:#0095da;}
@@ -1720,7 +1720,7 @@ article.border_pink {border-color: #ef417c !important;}
 
 /* Базовый стиль для кнопки */
 .product .btn_buy {
-   background: #007F16;
+   background: #ec6a70;
    color: #fff;
    padding: 9px 17px;
    border-radius: 10px;
@@ -1732,7 +1732,9 @@ article.border_pink {border-color: #ef417c !important;}
 
 /* Стиль при наведении */
 .product .btn_buy:hover {
-   background: #00C322;
+   background: #c95a5f;
+   transform: scale(1.1); /* Увеличение кнопки */
+   box-shadow: 0px 0px 40px rgba(240, 133, 139, 0.3); /* Тень под кнопкой */
 }
 
 
@@ -1772,7 +1774,7 @@ article.border_pink {border-color: #ef417c !important;}
     background-color: #f9f9f9;
     padding: 40px; /* Отступы внутри карточки продукта */
     border: 1px solid #ddd;
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: calc(33.333% - 20px); /* Ширина карточки продукта, минус отступ */
     box-sizing: border-box; /* Учитываем padding в ширину элемента */
@@ -1829,13 +1831,13 @@ article.border_pink {border-color: #ef417c !important;}
 
 .product {
     transition: all 0.3s ease;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* добавляем тень по умолчанию */
-    border-color: #00aa00; /* цвет обводки по умолчанию */
+    box-shadow: 0px 0px 20px rgba(240, 133, 139, 0.3); /* добавляем тень по умолчанию */
+    border-color: #ec6a70; /* цвет обводки по умолчанию */
 }
 
 .product:hover {
-    box-shadow: 0px 0px 20px rgba(0, 128, 0, 0.3); /* увеличиваем тень при наведении */
-    border-color: green; /* меняем цвет обводки при наведении */
+    box-shadow: 0px 0px 40px rgba(236, 106, 112, 0.9); /* увеличиваем тень при наведении */
+    border-color: #c95a5f; /* меняем цвет обводки при наведении */
 }
 
 .hidden {
@@ -1845,37 +1847,45 @@ article.border_pink {border-color: #ef417c !important;}
 
 /* socialnetworks*/
 
-.socialnetworks {
+.socialnetworks_one, .socialnetworks_two {
     display: flex;
-    align-items: center; /* Выравниваем элементы по центру по вертикали */
+    align-items: center;  /*Выравниваем элементы по центру по вертикали*/
     list-style-type: none;
     padding: 0;
 }
 
-.socialnetworks li {
-    margin-right: 0px; /* Расстояние между иконками */
+.socialnetworks_header li {
+    list-style-type: none;
 }
 
-.socialnetworks li:last-child {
-    margin-right: 0; /* Убираем отступ у последней иконки */
+.socialnetworks_onefoot li {
+    margin-right: 0px;  /*Расстояние между иконками*/
 }
 
-.socialnetworks .socialnetworks_anastasia li {
+.socialnetworks_onefoot li:last-child {
+    margin-right: 0; /*Убираем отступ у последней иконки*/
+}
+
+/* .socialnetworks .socialnetworks_anastasia li {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    height: 30px; /* Высота иконок */
-    border: none; /* Убираем контур */
-}
+    height: 30px; Высота иконок
+    border: none; /* Убираем контур
+}*/
 
-.socialnetworks li a svg {
-    width: 100%; /* Заполнение иконки внутри ссылки */
+/*.socialnetworks_anastasia_header li a svg {
+    width: 100%; /* Заполнение иконки внутри ссылки
     height: 100%;
-    fill: #ffffff; /* Цвет иконок */
+    fill: #ffffff; /* Цвет иконок
+}*/
+
+.socialnetworks_onefoot li:first-child {
+    margin-left: 0;  /*Убираем отступ слева только у первого элемента*/
 }
 
-.socialnetworks_anastasia li:first-child {
-    margin-left: 0; /* Убираем отступ слева только у первого элемента */
+.socialnetworks_header li:first-child {
+    margin-left: 0;  /*Убираем отступ слева только у первого элемента*/
 }
 
 .center-content {
@@ -1899,7 +1909,7 @@ article.border_pink {border-color: #ef417c !important;}
 }
 
 .bread_crumbs li a:hover{
-    color:#00C322;
+    color:#c95a5f;
 }
 
 /* Стили по умолчанию для логотипа */
@@ -1907,5 +1917,69 @@ article.border_pink {border-color: #ef417c !important;}
     width: 400px; /* Исходная ширина */
     height: 100px; /* Исходная высота */
 }
+
+.btn-primary:hover {
+    transform: scale(1.1); /* Увеличение кнопки */
+    box-shadow: 0px 0px 40px rgba(240, 133, 139, 0.3); /* Тень под кнопкой */
+}
+
+.socialnetworks_header a{
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+    transition: transform 0.3s ease; Добавляем плавность анимации
+}
+
+
+.socialnetworks_onefoot li:hover {
+    transform: scale(1.2);  /*Увеличиваем размер при наведении*/
+}
+
+.socialnetworks_header li:hover {
+    transform: scale(1.2);  /*Увеличиваем размер при наведении*/
+}
+
+/* Основные стили */
+.socialnetworks_three {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.socialnetworks_mobile {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.socialnetworks_mobile li {
+    margin: 0 10px;
+}
+
+.socialnetworks_mobile li a {
+    display: block;
+    width: 40px;
+    height: 40px;
+}
+
+.socialnetworks_mobile li svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Адаптивные стили */
+@media (max-width: 600px) {
+    .socialnetworks_mobile {
+        flex-direction: column;
+    }
+
+    .socialnetworks_mobile li {
+        margin: 10px 0;
+    }
+}
+
 
 
