@@ -20,9 +20,6 @@ def goods():
     # Все айдишники товаров из базы
     all_goods_ids = Good.all_goods_ids()
 
-    # Для теста
-    # amount = range(1, 25)
-
     # Получить список айдишников товаров, соответствующих поисковому запросу
     good_ids_after_search = get_good_ids_after_search(search, all_goods_ids)
 
@@ -58,39 +55,30 @@ def goods():
 # def section_list(category, section):
 #     """Переход по названию категории или раздела"""
 #
-#     # Отдать 404 если передали несуществующую категорию или раздел
-#     category_item = Category.get_category_by_folder(category)
-#     if not category_item:
-#         return render_template(
-#             '/404.html',
-#         )
+#     # TODO Отдать 404 если передали несуществующую категорию или раздел
 #
-#     if section:
-#         section_item = Section.get_section_by_folder(section)
-#         if not section_item:
-#             return return_error_page(response_code='404')
-#     else:
-#         section_item = 0
+#     # TODO Отфильтровать таким образом что если пришла категория то все товары по категории,
+#     #  если пришла категория и раздел то все товары только по этой категории и по этому разделу
+#     filtered_list_ids = []
 #
-#     # Страница и кол. объявлений на странице для пагинации
-#     page = parse_int(request.args.get("p", 1))
-#     final_list_ids = paginate_goods(good_ids_after_search, page)
+#     # TODO Страница и кол. объявлений на странице для пагинации
 #
-#     # Список фотографий к каждому объявлению
-#     for good_item in final_list:
-#         good_item.photos = Photo.all_photo_items_by_good(good_id=good_item.id)
+#     # TODO собрать объекты
+#     final_list = []
 #
-#     # Категории и разделы
-#     categories, sections = categories_sections_list()
+#     # TODO Список фотографий к каждому объявлению
+#
+#     # TODO Категории и разделы
+#
+#     # TODO Добавить js для обработки такого раута или добавить в тот который фильтрует по названию товара
 #
 #     return render_template(
 #         '/goods.html',
 #         goods_list=final_list,
-#         search_filter=search,
 #         categories=categories,
 #         sections=sections,
 #         current_year=datetime.now().year,
 #         records_per_page=RECORDS_PER_PAGE,
 #         current_page=page,
-#         pagination=generate_pagination(all_goods_ids, page, final_list),
+#         pagination=generate_pagination(filtered_list_ids, page, final_list),
 #     )
