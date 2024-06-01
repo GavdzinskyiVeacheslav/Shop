@@ -20,10 +20,9 @@
                 <div class="contact-block" style="margin-bottom: 20px;">
                 <h3>Каталог</h3>
                 <ul class="contact-item">
-                    <li><a href="#">Парфуми</a></li>
-                    <li><a href="#">Помади</a></li>
-                    <li><a href="#">Лосьйони</a></li>
-                    <li><a href="#">Креми для тіла</a></li>
+                {% for category in categories[:4] %}
+                    <li><a href="/{{ category.folder }}/">{{ category.name }}</a></li>
+                {% endfor %}
                 </ul>
                 </div>
             </nav>

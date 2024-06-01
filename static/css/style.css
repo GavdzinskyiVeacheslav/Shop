@@ -170,7 +170,7 @@ header .drop-menu { position: relative;}
 header .drop-menu span.text-drop-menu {margin-left:8px;}
 header .drop-content {display: none;position: fixed;box-shadow:none;z-index:29;width: 100%;max-width: 100%;background:#fff;border-radius: 0 0 15px 15px;padding: 10px 0;top: 130px;left: 0;height: calc(100vh - 300px);overflow:auto;}
 header .drop-content a {display: block;margin-bottom:.4rem; text-decoration:none;color:#181C32;margin-left:10px;}
-header .drop-content a:hover {color:#0095da;text-decoration:underline}
+header .drop-content a:hover {color:#c95a5f;text-decoration:underline}
 header .drop-content a.title-list{font-size: 16px; font-weight: 600; text-decoration: none; margin-bottom: .8rem; line-height: 1.3;margin-left: 0;}
 header .drop-content a.last{margin-bottom:1rem;}
 header .col-custom{width:calc(100% - 150px);}
@@ -1635,7 +1635,16 @@ article.border_pink {border-color: #ef417c !important;}
 .product button:hover {
     background-color: #555;
 }
+
 /* Responsive Styles */
+@media (max-width: 1139px) {
+    .product {
+        margin-right: 3px;
+        margin-left: 3px;
+    }
+}
+
+
 @media (max-width: 768px) {
     .product {
         flex: 1 1 calc(50% - 1rem);

@@ -1,5 +1,7 @@
 import dao.good as dao
 import model.models as model
+from business.category import Category
+from business.section import Section
 
 
 class Good(object):
@@ -13,6 +15,8 @@ class Good(object):
         self.__existence = dto.existence if dto else None
         self.__add_date = dto.add_date if dto else None
         self.__picture = None
+        self.__section = None
+        self.__category = None
         if good_id:
             self.__reload(good_id)
 
@@ -64,7 +68,15 @@ class Good(object):
     def add_date(self):
         return self.__add_date
 
-        # CRUD #
+    @property
+    def section(self):
+        return Section(section_id=self.__section_id) if not self.__section else self.__section
+
+    @property
+    def category(self):
+        return Category(category_id=self.section.category_id) if not self.__category else self.__category
+
+    # CRUD #
 
     def insert(self, **params):
         """Добавление записи в БД"""

@@ -23,23 +23,28 @@
             {% endif %}
             {% for good in goods_list %}
             <div class="product" id="product_{{ good.id }}"
-                onmouseenter="start_hover({{ good.id }});" onmouseleave="end_hover({{ good.id }});">
+                 onmouseenter="start_hover({{ good.id }});" onmouseleave="end_hover({{ good.id }});">
                 <img src="{% if good.photos %}/static/{{ good.photos[0].picture }}{% else %}/static/images/default-image.jpg{% endif %}"
                      alt="{{ good.name }}">
                 <h2>{{ good.name }}</h2>
-                <p class="price">${{ good.price }}</p>
+                Код товару: {{ good.id }}
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">{{ good.category.name }}</li>
+                    <li class="breadcrumb-item">{{ good.section.name }}</li>
+                </ul>
+                <p class="price">{{ good.price }} грн</p>
                 <p class="description" style="display: none;">{{ good.description[0:100] }}....</p>
-                    <p class="existence">
-                        {% if good.existence == 1 %}
-                            <span class="in-stock">
+                <p class="existence">
+                    {% if good.existence == 1 %}
+                    <span class="in-stock">
                                 <i class="bi bi-check-circle-fill"></i> Є в наявності
                             </span>
-                        {% else %}
-                            <span class="out-of-stock">
+                    {% else %}
+                    <span class="out-of-stock">
                                 <i class="bi bi-x-circle-fill"></i> Немає в наявності
                             </span>
-                        {% endif %}
-                    </p>
+                    {% endif %}
+                </p>
                 <button class="btn_buy"><i class="bi bi-cart3"></i>Купить</button>
             </div>
             {% endfor %}
