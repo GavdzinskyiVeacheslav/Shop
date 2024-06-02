@@ -278,6 +278,9 @@ a.btn.open_categories_menu, a.btn.close_categories_menu {margin-left: -10px;padd
 .breadcrumb .breadcrumb-item a {text-decoration:none;color: var(--bs-body-color);}
 li.breadcrumb-item.active {color: var(--bs-gray-600);}
 .breadcrumb .breadcrumb-item a:hover {color:#0095da;}
+.breadcrumb {font-weight: bold; font-family: 'bootstrap-icons';}
+.breadcrumb-item:first-child {color: #c95a5f;}
+.breadcrumb-item:last-child {color: #ec6a70;}
 
 /****** LOGIN PAGE ******/
 .help-password{color: #9210db;  font-weight: bold;  text-decoration: none;}
@@ -1802,18 +1805,27 @@ article.border_pink {border-color: #ef417c !important;}
 }
 
 .product h2 {
-    margin: 15px 0;
+    margin: 7px 0;
     font-size: 1.5em;
     text-align: center;
 }
 
 .product .price, .product .description, .product .existence {
-    margin: 10px 0;
+    margin: 5px 0;
     text-align: center;
 }
 
 .product .price {
     font-size: 1.5em; /* Размер шрифта равен размеру заголовка */
+}
+
+/* Текст категории и раздела */
+.section-text {
+    font-weight: bold;
+}
+
+.category-text {
+    font-weight: bold;
 }
 
 /* Обводка и сердечко */
@@ -2004,6 +2016,20 @@ article.border_pink {border-color: #ef417c !important;}
   border-color: #c95a5f;
 }
 
+.contact-block-footer {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 17px;
+  width: 70%; /* Adjust width as needed */
+  margin: 0 auto; /* Center the block */
+  /* max-width: auto; */
+  /* margin: 5px auto; */
+  box-shadow: 0px 0px 10px rgba(236, 106, 112, 0.9);
+  border-color: #c95a5f;
+  margin-bottom: 25px;
+}
+
 .contact-block h2 {
   text-align: left;
   color: #333;
@@ -2130,3 +2156,4 @@ input[type="number"] {
     text-align: left;
   }
 }
+

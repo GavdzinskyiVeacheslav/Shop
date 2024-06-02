@@ -33,7 +33,8 @@
                     <li class="breadcrumb-item">{{ good.section.name }}</li>
                 </ul>
                 <p class="price">{{ good.price }} грн</p>
-                <p class="description" style="display: none;">{{ good.description[0:100] }}....</p>
+                <p class="description" style="display: none; font-family: bootstrap-icons; margin-top: -5px;">
+                    {{ good.short_description }}....</p>
                 <p class="existence">
                     {% if good.existence == 1 %}
                     <span class="in-stock">

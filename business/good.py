@@ -4,6 +4,11 @@ from business.category import Category
 from business.section import Section
 
 
+# Константы
+START_CUTTING = 0
+END_CUTTING = 100
+
+
 class Good(object):
     def __init__(self, good_id=None, dto=None):
         self.__id = dto.id if dto else None
@@ -47,6 +52,10 @@ class Good(object):
     @property
     def description(self):
         return self.__description
+
+    @property
+    def short_description(self):
+        return self.__description[START_CUTTING:END_CUTTING]
 
     @property
     def category_id(self):

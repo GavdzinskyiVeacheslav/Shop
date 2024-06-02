@@ -1,12 +1,10 @@
-from datetime import datetime
-
 from flask import render_template, request
 
 from business.good import Good
 from business.photo import Photo
 from public.routes import public_bp
-from utils.common import (parse_int, categories_sections_list, cut_inject, RECORDS_PER_PAGE, get_good_ids_after_search,
-                          paginate_goods, generate_pagination)
+from utils.common import (parse_int, cut_inject, RECORDS_PER_PAGE, get_good_ids_after_search, paginate_goods,
+                          generate_pagination)
 
 
 @public_bp.route("/")
@@ -34,36 +32,34 @@ def goods():
     for good_item in final_list:
         good_item.photos = Photo.all_photo_items_by_good(good_id=good_item.id)
 
-    # Категории и разделы
-    categories, sections = categories_sections_list()
-
     return render_template(
         '/goods.html',
         goods_list=final_list,
         search_filter=search,
-        categories=categories,
-        sections=sections,
-        current_year=datetime.now().year,
         records_per_page=RECORDS_PER_PAGE,
         current_page=page,
         pagination=generate_pagination(all_goods_ids, page, final_list),
     )
 
 
-@public_bp.route("/good_page/<int:good_id>")
-def good_page(good_id):
-    """Страница конкретного товара"""
-    return "Перешёл"
+# TODO создать раут для перехода на страницу товара
+# """Страница конкретного товара"""
+# TODO 1. Сделать новый раут в shop.py этот раут будет динамический и он будет для показа конкретного товара назвать
+#  например /good_page/<int:good_id>  - если тяжело посмотреть информацию про динамические рауты flask.
+#    1.1 Внутри раута должен собираться объект данного товара и передаваться дальше в шаблон.
+#    1.2  # Список фотографий к товару
+#         for good_item in final_list:
+#         good_item.photos = Photo.all_photo_items_by_good(good_id=good_item.id)
+#    и передаваться дальше в шаблон.
+#    1.3 Если передали id которого у нас нет в базе нужно показать кастомный шаблон 404 - ( Его нужно создать ) -
+#    показывать его в середине оставляя header и footer как на главной странице
+#     1.4 Пусть этот раут возвращает good_page.html в котором должен сохраниться header и footer как на
+#     главной странице но середина должна показывать: Галерею фотографий полное описание всю нужную информацию и кнопку
+#     купить.
 
 
-
-
-
-# @public_bp.route('/<category>/', defaults={"section": ''})
-# @public_bp.route('/<category>/<section>/')
-# def section_list(category, section):
-#     """Переход по названию категории или раздела"""
-#
+# TODO создать раут который будет обрабатывать приём категории и раздела
+# """Переход по названию категории или раздела"""
 #     # TODO Отдать 404 если передали несуществующую категорию или раздел
 #
 #     # TODO Отфильтровать таким образом что если пришла категория то все товары по категории,
@@ -81,13 +77,36 @@ def good_page(good_id):
 #
 #     # TODO Добавить js для обработки такого раута или добавить в тот который фильтрует по названию товара
 #
-#     return render_template(
-#         '/goods.html',
-#         goods_list=final_list,
-#         categories=categories,
-#         sections=sections,
-#         current_year=datetime.now().year,
-#         records_per_page=RECORDS_PER_PAGE,
-#         current_page=page,
-#         pagination=generate_pagination(filtered_list_ids, page, final_list),
-#     )
+#    render template возвращает good.html и нужные для работы переменные
+
+
+@public_bp.route("/delivery")
+def delivery():
+    """Доставка"""
+    return render_template(
+        '/info/delivery.html',
+    )
+
+
+@public_bp.route("/warranty_and_returns")
+def warranty_and_returns():
+    """Гарантия и возврат"""
+    return render_template(
+        '/info/warranty_and_returns.html',
+    )
+
+
+@public_bp.route("/contacts")
+def contacts():
+    """Контакты"""
+    return render_template(
+        '/info/contacts.html',
+    )
+
+
+@public_bp.route("/feedback")
+def feedback():
+    """Отзывы"""
+    return render_template(
+        '/info/feedback.html',
+    )
