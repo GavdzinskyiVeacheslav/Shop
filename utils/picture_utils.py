@@ -37,7 +37,7 @@ def save_preview(item_id=0):
         preview_width = int(width * preview_height / height)
 
     resized = image.resize((preview_width, preview_height))
-    return resized.save(os.path.join(root_path(item_id=item_id, preview=True), str(item_id) + '.png'))
+    return resized.save(os.path.join(root_path(item_id=item_id, preview=True), str(item_id) + '.jpg'))
 
 
 def delete_pictures(item_id=0):
@@ -63,7 +63,7 @@ def root_path(item_id=0, preview=False):
 
 def picture_path(item_id=0, preview=False):
     """Собрать путь к картинке"""
-    return os.path.join(root_path(item_id=item_id, preview=preview), str(item_id) + '.png')
+    return os.path.join(root_path(item_id=item_id, preview=preview), str(item_id) + '.jpg')
 
 
 def picture_url(item_id=0, preview=False):
@@ -72,4 +72,4 @@ def picture_url(item_id=0, preview=False):
         return 'preview/' + str(int(item_id / 1000) + 1) + '/' + \
                str(item_id) + '.jpg'
     else:
-        return 'pictures/' + str(int(item_id / 1000) + 1) + '/' + str(item_id) + '.png'
+        return 'pictures/' + str(int(item_id / 1000) + 1) + '/' + str(item_id) + '.jpg'

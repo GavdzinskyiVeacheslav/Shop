@@ -33,7 +33,7 @@ def goods():
         good_item.photos = Photo.all_photo_items_by_good(good_id=good_item.id)
 
     return render_template(
-        '/goods.html',
+        '/public/goods.html',
         goods_list=final_list,
         search_filter=search,
         records_per_page=RECORDS_PER_PAGE,
@@ -51,8 +51,7 @@ def goods():
 #         for good_item in final_list:
 #         good_item.photos = Photo.all_photo_items_by_good(good_id=good_item.id)
 #    и передаваться дальше в шаблон.
-#    1.3 Если передали id которого у нас нет в базе нужно показать кастомный шаблон 404 - ( Его нужно создать ) -
-#    показывать его в середине оставляя header и footer как на главной странице
+#    1.3 Если передали id которого у нас нет в базе нужно показать кастомный шаблон 404 -
 #     1.4 Пусть этот раут возвращает good_page.html в котором должен сохраниться header и footer как на
 #     главной странице но середина должна показывать: Галерею фотографий полное описание всю нужную информацию и кнопку
 #     купить.
@@ -80,11 +79,21 @@ def goods():
 #    render template возвращает good.html и нужные для работы переменные
 
 
+@public_bp.route("/test")
+def test():
+    good_item = Good(good_id=2)
+    good_item.photos = Photo.all_photo_items_by_good(good_id=good_item.id)
+    return render_template(
+        '/public/good_page.html',
+        good_item=good_item,
+    )
+
+
 @public_bp.route("/delivery")
 def delivery():
     """Доставка"""
     return render_template(
-        '/info/delivery.html',
+        '/public/info/delivery.html',
     )
 
 
@@ -92,7 +101,7 @@ def delivery():
 def warranty_and_returns():
     """Гарантия и возврат"""
     return render_template(
-        '/info/warranty_and_returns.html',
+        '/public/info/warranty_and_returns.html',
     )
 
 
@@ -100,7 +109,7 @@ def warranty_and_returns():
 def contacts():
     """Контакты"""
     return render_template(
-        '/info/contacts.html',
+        '/public/info/contacts.html',
     )
 
 
@@ -108,5 +117,5 @@ def contacts():
 def feedback():
     """Отзывы"""
     return render_template(
-        '/info/feedback.html',
+        '/public/info/feedback.html',
     )

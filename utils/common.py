@@ -31,7 +31,7 @@ def generate_pagination(all_goods_ids, page, final_list):
         total_amount=len(all_goods_ids),
         amount_per_page=RECORDS_PER_PAGE,
         current_page=page,
-        template_path='/paginator.html',
+        template_path='/public/paginator.html',
     ) if final_list else ''
 
 
