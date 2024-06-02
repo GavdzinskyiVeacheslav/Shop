@@ -1,7 +1,9 @@
 let sizeTestImage;
 var images_array = [];
-var minImageWidth = 564;
-var minImageHeight = 564;
+var minImageWidth = 300;
+var minImageHeight = 300;
+var realCropWidth = 0;
+var realCropHeight = 0;
 
 //======================================================================================================================
 // Функция асинхронная, так как загрузка занимает время
@@ -89,8 +91,8 @@ function image_events_initialize({
                     var scaleFactor = imageData.naturalWidth / imageData.width;
 
                     // Реальные размеры кропа = ширина кропа * коэффициент
-                    var realCropWidth = Math.round(cropboxData.width * scaleFactor);
-                    var realCropHeight = Math.round(cropboxData.height * scaleFactor);
+                    realCropWidth = Math.round(cropboxData.width * scaleFactor);
+                    realCropHeight = Math.round(cropboxData.height * scaleFactor);
 
                     // Получаем размеры кропа для минимальных ширины и высоты
                     var minCropWidth = Math.round(minImageWidth / scaleFactor);
@@ -117,7 +119,7 @@ function image_events_initialize({
 
 function ShowCroppedImage() {
 
-    var canvas = cropper.getCroppedCanvas({ width: minImageWidth, height: minImageHeight });
+    var canvas = cropper.getCroppedCanvas({ width: realCropWidth, height: realCropHeight });
     var photo_index = images_array.length - 1;
 
     var newPhotoContainer = $("#PhotoContainer").clone();
@@ -165,5 +167,4 @@ function DeleteCroppedImage(photo_index, photo_id) {
     }
 
     set_file_input_disabled();
-
 }

@@ -1900,7 +1900,7 @@ article.border_pink {border-color: #ef417c !important;}
 .center-content {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: top;  /* center */
     height: 100vh; /* Это центрирует контент вертикально по центру страницы */
 }
 
@@ -2052,4 +2052,81 @@ article.border_pink {border-color: #ef417c !important;}
 .contact-item .phone-icon,
 .contact-item .location-icon {
   color: #000; /* Черный цвет */
+}
+
+/* Input id товара */
+input[type="number"] {
+    width: 150px; /* можно изменить по необходимости */
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+input[type="number"]:focus {
+    border-color: #66afe9;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+#good_id {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    display: inline-block;
+    margin-bottom: 7px;
+}
+
+/* Основные стили для nav bar */
+#nav_zup {
+  background-color: #333;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Стили для ссылок в nav bar */
+#nav_zup a {
+  float: center;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+  font-size: 17px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Эффект при наведении на ссылку */
+#nav_zup a:hover {
+  background-color: #575757;
+  color: #ffffff;
+}
+
+/* Стили для активной ссылки */
+#nav_zup a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Стили для мобильных устройств */
+@media screen and (max-width: 600px) {
+  #nav_zup a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
 }

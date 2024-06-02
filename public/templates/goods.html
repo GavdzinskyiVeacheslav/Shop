@@ -22,7 +22,7 @@
             <h3>Товары не найдены</h3>
             {% endif %}
             {% for good in goods_list %}
-            <div class="product" id="product_{{ good.id }}"
+            <div class="product" id="product_{{ good.id }}" onclick="location.href='good_page/{{ good.id }}'"
                  onmouseenter="start_hover({{ good.id }});" onmouseleave="end_hover({{ good.id }});">
                 <img src="{% if good.photos %}/static/{{ good.photos[0].picture }}{% else %}/static/images/default-image.jpg{% endif %}"
                      alt="{{ good.name }}">
@@ -45,7 +45,8 @@
                             </span>
                     {% endif %}
                 </p>
-                <button class="btn_buy"><i class="bi bi-cart3"></i>Купить</button>
+                <button class="btn_buy" onclick="event.stopPropagation(); location.reload();">
+                    <i class="bi bi-cart3"></i>Купить</button>
             </div>
             {% endfor %}
         </div>

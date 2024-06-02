@@ -50,6 +50,15 @@ def goods():
     )
 
 
+@public_bp.route("/good_page/<int:good_id>")
+def good_page(good_id):
+    """Страница конкретного товара"""
+    return "Перешёл"
+
+
+
+
+
 # @public_bp.route('/<category>/', defaults={"section": ''})
 # @public_bp.route('/<category>/<section>/')
 # def section_list(category, section):

@@ -3,9 +3,10 @@
 //======================================================================================================================
 async function add_photo() {
 
-    $('.loader_holder').fadeIn();
-    $('.button_spinner').css("display","inline-block");
-    $('#add_ad_button').prop('disabled',true);
+    if (!$('#good_id').val()) {
+        alert('Введите id товара');
+        return;
+    }
 
     let photos_amount = images_array.length;
     let canvas = [];
@@ -19,6 +20,15 @@ async function add_photo() {
             j++;
         }
     });
+
+    if (!photos_amount) {
+        alert('Добавьте хотя бы одну фотографию');
+        return;
+    }
+
+    $('.loader_holder').fadeIn();
+    $('.button_spinner').css("display","inline-block");
+    $('#add_ad_button').prop('disabled',true);
 
     let formData = new FormData();
     formData.append("good_id", $("#good_id").val());

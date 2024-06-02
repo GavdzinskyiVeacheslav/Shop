@@ -4,23 +4,21 @@
 {% endblock specific_header %}
 
 {% block body %}
-<nav style="display: flex; justify-content: center;">
-    <ul style="list-style-type: none; padding: 0; display: flex;">
-        <li style="margin-right: 10px;"><a href="/goods">Главная страница</a></li>
-        <li style="margin-right: 10px;"><a href="#">Добавить фото</a></li>
-        <li style="margin-right: 10px;"><a href="#">Оплаты</a></li>
-        <li style="margin-right: 10px;"><a href="/control/logout">Выход</a></li>
+<nav id="nav_zup" style="display: flex; justify-content: center;">
+    <ul style="list-style-type: none; padding: 0; display: flex; ">
+        <li><a href="/goods">Главная страница</a></li>
+        <li><a href="#">Добавить фото</a></li>
+        <li><a href="#">Оплаты</a></li>
+        <li><a href="/control/logout">Выход</a></li>
     </ul>
 </nav>
 <div class="center-content">
     <div class="row mb-4">
         <div class="column col-9">
             <div>
-                <br><br>
                 <label for="good_id"> ID Товара:
                     <input type="number" id="good_id">
                 </label>
-                <br><br>
             </div>
             <div class="create_ad_photos_block">
                 <div id="AllPhotos" class="d-flex">
@@ -49,6 +47,7 @@
         </div>
     </div>
 </div>
+
 <!--Диалог обработки картинки-->
 <div class="modal fade" id="image_crop_modal_show_picture" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
