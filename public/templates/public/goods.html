@@ -24,8 +24,8 @@
             {% for good in goods_list %}
             <div class="product" id="product_{{ good.id }}" onclick="location.href='good_page/{{ good.id }}'"
                  onmouseenter="start_hover({{ good.id }});" onmouseleave="end_hover({{ good.id }});">
-                <img src="{% if good.photos %}/static/{{ good.photos[0].picture }}{% else %}/static/images/default-image.jpg{% endif %}"
-                     alt="{{ good.name }}">
+                <img src="{% if good.photos %}/static/{{ good.photos[-1].picture }}{% else %}/static/images/default-image.jpg{% endif %}"
+                     alt="Нет картинки">
                 <h2>{{ good.name }}</h2>
                 Код товару: {{ good.id }}
                 <ul class="breadcrumb">
@@ -47,7 +47,7 @@
                     {% endif %}
                 </p>
                 <button class="btn_buy" onclick="event.stopPropagation(); location.reload();">
-                    <i class="bi bi-cart3"></i>Купить</button>
+                    <i class="bi bi-cart3"></i>Купити</button>
             </div>
             {% endfor %}
         </div>

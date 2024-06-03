@@ -5,15 +5,18 @@
 <meta property="og:title" content="{{ good_item.description }}">
 <meta property="og:description" content="{{ good_item.description }}">
 {% if good_item.photos %}
-    <meta property="og:image" content="domain{{ good_item.photos[0].picture }}">
+<meta property="og:image" content="/static/{{ good_item.photos[0].picture }}">
 {% endif %}
 <meta property="og:url" content="domain{{ url_for('public.goods') }}/{{ good_item.id }}">
 <meta property="og:site_name" content="Anastasia_shop">
 <meta property="og:type" content="article">
 <!-- CSS -->
-<link rel="stylesheet" href="/static/css/lightbox.css" type="text/css" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="">
-<link rel="stylesheet" href="/static/css/jssocials.css" type="text/css" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="">
-<link rel="stylesheet" href="/static/css/jssocials-theme-flat.css" type="text/css" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="">
+<link rel="stylesheet" href="/static/css/lightbox.css" type="text/css" as="style"
+      onload="this.onload=null;this.rel='stylesheet'" crossorigin="">
+<link rel="stylesheet" href="/static/css/jssocials.css" type="text/css" as="style"
+      onload="this.onload=null;this.rel='stylesheet'" crossorigin="">
+<link rel="stylesheet" href="/static/css/jssocials-theme-flat.css" type="text/css" as="style"
+      onload="this.onload=null;this.rel='stylesheet'" crossorigin="">
 <!-- JS -->
 <script src="/static/js/goods.js" defer></script>
 <script src="/static/js/control.js" defer></script>
@@ -23,87 +26,92 @@
 
 {% block body %}
 <div class="row">
-<div class="column">
-<div class="page-title">
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url_for('public.goods') }}">Главная</a></li>
-            <li class="breadcrumb-item"><a href="/{{ good_item.category.folder }}/">{{ good_item.category.name }}</a></li>
-            <li class="breadcrumb-item"><a href="/{{ good_item.category.folder }}/{{ good_item.section.folder }}/">{{ good_item.section.name }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Товар №{{ good_item.id }}</li>
-        </ol>
-    </nav>
-</div>
+    <div class="column">
+        <div class="page-title">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('public.goods') }}">Головна сторінка</a></li>
+                    <li class="breadcrumb-item"><a href="/{{ good_item.category.folder }}/">{{ good_item.category.name
+                        }}</a></li>
+                    <li class="breadcrumb-item"><a
+                            href="/{{ good_item.category.folder }}/{{ good_item.section.folder }}/">{{
+                        good_item.section.name }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Код товару {{ good_item.id }}</li>
+                </ol>
+            </nav>
+        </div>
 
-</div>
+    </div>
     <main class="column col-8">
         <div id="ad_page_block" class="shadow_block">
-            <div class="ad_page_block_buttons">
-                <div class="share_button">
-                    <i class="bi bi-share"></i>Поделиться
-                    <div>
-                        <div id="share"></div>
-                    </div>
+            <div class="good_name">
+                <div>{{ good_item.name }}</div>
+                <div class="category-section">
+                    <span class="dark-pink-color">{{ good_item.category.name }}</span> / <span class="light-pink-color">{{ good_item.section.name }}</span>
                 </div>
             </div>
-
-            <div class="obv_text">
-                <div class="ad_text_title">Описание</div>
-                <div class="ad_text_txt">{{ good_item.description }}</div>
-            </div>
-
-        {% if good_item.photos %}
-                <div class="ad_photos">
-                    <div class="ad_photo_big">
-                        <div class="ad_photo_big_background_blur" style="background-image:url({{ good_item.photos[0].picture }});"></div>
-                        <a href="/static/{{ good_item.photos[0].picture }}" data-lightbox=""
-                               data-title="№{{ good_item.id }}, {{ good_item.description }}" id="prev_image_link{{ good_item.photos[0].id }}"
-                               data-idad="{{ good_item.id }}">
-                            <img src="/static/{{ good_item.photos[0].picture }}" id="main_image{{ good_item.id }}">
-                            </a>
-                        </div>
-
-                    <div class="ad_photo_previews">
-                        {% for photo in good_item.photos %}
-                        <a href="/static/{{ photo.picture }}" data-lightbox="{{ good_item.id }}"
-                               data-title="№{{ good_item.id }}, {{ good_item.description }}" id="prev_image_link{{ good_item.id }}"
-                               data-idad="{{ good_item.id }}">
-                        <img src="/static/{{ photo.picture_preview }}" id="image{{ photo.id }}" onmouseover="changeImage({{ photo.id }}, {{ good_item.id }})">
-                            </a>
-                        {% endfor %}
-                    </div>
-
+            {% if good_item.photos %}
+            <div class="ad_photos">
+                <div class="ad_photo_big">
+                    <div class="ad_photo_big_background_blur"
+                         style="background-image:url(/static/{{ good_item.photos[0].picture }});"></div>
+                    <a href="/static/{{ good_item.photos[0].picture }}" data-lightbox=""
+                       data-title="№{{ good_item.id }}, {{ good_item.description }}"
+                       id="prev_image_link{{ good_item.photos[0].id }}"
+                       data-idad="{{ good_item.id }}">
+                        <img src="/static/{{ good_item.photos[0].picture }}" id="main_image{{ good_item.id }}">
+                    </a>
                 </div>
-        {% endif %}
+
+                <div class="ad_photo_previews">
+                    {% for photo in good_item.photos %}
+                    <a href="/static/{{ photo.picture }}" data-lightbox="{{ good_item.id }}"
+                       data-title="№{{ good_item.id }}, {{ good_item.description }}"
+                       id="prev_image_link{{ good_item.id }}"
+                       data-idad="{{ good_item.id }}">
+                        <img src="/static/{{ photo.picture_preview }}" id="image{{ photo.id }}"
+                             onmouseover="changeImage({{ photo.id }}, {{ good_item.id }})">
+                    </a>
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <div class="good_description">Опис</div>
+                    <div class="good_text">{{ good_item.description }}</div>
+                </div>
+
+            </div>
+            {% endif %}
 
             <div class="ad_meta_descript">
                 <div>
-                    <div>№{{ good_item.id }}</div>
+                    <div>Код товару: {{ good_item.id }}</div>
                     <div class="meta_separator" style="display:none;">·</div>
                     <div style="display:none;">0 просмотров</div>
                 </div>
-                    <div>Товар добавлен: {{ good_item.add_date }}</div>
+                <div>Товар добавлен: {{ good_item.add_date }}</div>
             </div>
         </div>
     </main>
 
-    <aside class="column col-4">
+    <aside class="column col-3">
         <div class="ad_page_block_user shadow_block">
-            <div class="ad_user_name"> ads.owner_name </div>
-            <div class="ad_phone ad_phone_closed">
-                <div class="ad_phone_descript">Показать телефон</div>
-                <div class="ad_phone_tel_hidden"><i class="fa fa-regular fa-phone"></i><span>ads.owner_phone[0:3] </span>-XXX-XXXX</div>
-            </div>
-            <a href="tel:ads.owner_phone " class="ad_phone ad_phone_open">
-                <div class="ad_phone_descript">Позвонить</div>
-                    <i class="fa fa-regular fa-phone"></i>ads.owner_phone[0:3] - ads.owner_phone[3:6] - ads.owner_phone[6:10]
-            </a>
-            <div class="ad_email">
-                <div class="ad_email_descript_mobile">Написать e-mail</div>
-                <div class="ad_email_descript">Написать e-mail</div>
-                <div class="ad_email_mail"><i class="bi bi-envelope"></i> ads.owner_email </div>
-            </div>
-
+            <p class="good_code">Код товару: {{ good_item.id }}</p>
+            <p class="price"><b>{{ good_item.price }} грн</b></p>
+            <p class="existence">
+                {% if good_item.existence == 1 %}
+                <span class="in-stock">
+                                <i class="bi bi-check-circle-fill"></i> Є в наявності
+                            </span>
+                {% else %}
+                <span class="out-of-stock">
+                                <i class="bi bi-x-circle-fill"></i> Немає в наявності
+                            </span>
+                {% endif %}
+            </p>
+            <button class="button_buy" onclick="location.reload();">
+                <i class="bi bi-cart3"></i>Купити
+            </button>
         </div>
     </aside>
 </div>
