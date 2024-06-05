@@ -160,7 +160,7 @@ function DeleteCroppedImage(photo_index, photo_id) {
     // Если команда - удалить реальную картинку, а не свежезагруженную, заполнить список для дальнейшего удаления
     if (photo_exist) {
         if (photo_id != 'undefined' && photo_id != false && photo_id != null) {
-            DeletedPhotoIds.push(photo_id);
+            deletedPhotoIds.push(photo_id);
         }
         // Удалить указатель на существование фотографии
         $("#CroppedPhoto" + photo_index).removeAttr('data-existing_photo');

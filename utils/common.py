@@ -194,3 +194,15 @@ def return_error(ok=0, error='error', data=None):
         'error': error,
         'data': data
     }
+
+
+def find_duplicates(numbers):
+    """"""
+    duplicates = {}
+    for number in numbers:
+        if number in duplicates:
+            duplicates[number] += 1
+        else:
+            duplicates[number] = 1
+    duplicates = {k: v for k, v in duplicates.items() if v > 1}
+    return duplicates

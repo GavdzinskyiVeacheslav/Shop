@@ -1,0 +1,25 @@
+{% extends '/public/layout.html' %}
+
+{% block specific_header %}
+{% endblock specific_header %}
+
+{% block body %}
+<div class="container-shop-cart">
+    <h2>Корзина товаров:</h2>
+    {% for good_item in good_items %}
+    <div class="cart-item">
+        <img src="{% if good_item.photos %}/static/{{ good_item.photos[-1].picture }}{% else %}/static/images/default-image.jpg{% endif %}"
+                     alt="Нет картинки">
+        <div class="cart-item-details">
+            <div class="cart-item-title">{{ good_item.name }}</div>
+            <div class="cart-item-price">{{ good_item.price }} грн</div>
+            <div class="cart-item-quantity">
+                 {{ quantity.get(good_item.id, 1) }} шт
+                <button class="cart-item-remove">Удалить</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="cart-total">Общая сумма: {{ total_sum }} грн</div>
+</div>
+{% endblock body %}

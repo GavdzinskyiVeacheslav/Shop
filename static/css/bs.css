@@ -589,7 +589,7 @@ select:disabled {
     --bs-badge-font-size: 0.75em;
     --bs-badge-font-weight: 700;
     --bs-badge-color: #fff;
-    --bs-badge-bg-color: #F44336;
+    --bs-badge-bg-color: #ec6a70;
     --bs-badge-border-radius: 0.375rem;
     display: inline-block;
     padding: var(--bs-badge-padding-y) var(--bs-badge-padding-x);

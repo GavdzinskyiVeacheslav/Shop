@@ -23,7 +23,7 @@
             <div class="column col-auto">
                 <h1>
                     <a href="/goods" style="display:block;">
-                        <img src="/static/images/logos/logo1.svg" alt="#" width="126" height="100">
+                        <img src="/static/images/logos/logo1.svg" alt="Нет логотипа" width="126" height="100">
                     </a>
                 </h1>
             </div>
@@ -80,8 +80,9 @@
                                 </li>
                                 <li class="list-inline-item item_favorite"><a href="/shop_cart" aria-label="Кошик">
                                     <div>
-                                        <div class="user_panel_icon"><i class="bi bi-cart3"></i></div>
+                                        <div id="cart" class="user_panel_icon"><i class="bi bi-cart3"></i></div>
                                         <div class="user_panel_text">Кошик</div>
+                                        <div id="bage"><span style="display: none;">0</span></div>
                                     </div>
                                 </a>
                                 </li>
@@ -291,9 +292,10 @@
         </a>
     </div>
     <div class="bottom_item_add_mobile">
-        <a href="/create_ad">
+        <a href="/shop_cart">
             <div class="mobile_menu_bottom_item_icon"><i class="bi bi-cart3"></i></div>
             <div class="mobile_menu_bottom_item_text">Кошик</div>
+            <div id="bage_mobile"><span style="display: none;">0</span></div>
         </a>
     </div>
 </div>

@@ -1,10 +1,13 @@
+import json
+import urllib.parse
+
 from flask import render_template, request
 
 from business.good import Good
 from business.photo import Photo
 from public.routes import public_bp
 from utils.common import (parse_int, cut_inject, RECORDS_PER_PAGE, get_good_ids_after_search, paginate_goods,
-                          generate_pagination)
+                          generate_pagination, find_duplicates)
 
 
 @public_bp.route("/")
@@ -86,6 +89,50 @@ def test():
     return render_template(
         '/public/good_page.html',
         good_item=good_item,
+    )
+
+
+@public_bp.route("/shop_cart")
+def shop_cart():
+    """Корзина"""
+
+    # Неизменяемый словарь кук
+    data = request.cookies
+
+    # Извлечь значения из ImmutableMultiDict
+    good_count = parse_int(data.get('goodCount'))
+    good_ids_encoded = data.get('productIDs')
+
+    # Декодировать строку
+    good_ids_decoded = urllib.parse.unquote(good_ids_encoded)
+
+    # Преобразовать строку в список
+    good_ids = json.loads(good_ids_decoded)
+
+    # Количество каждого товара
+    quantity = find_duplicates(good_ids)
+
+    # Собрать объекты товаров
+    good_items = [Good(good_id=good_id) for good_id in list(set(good_ids))]
+
+    # Динамически создадим новый атрибут, запишем в него цену учитывая количество
+    for good_item in good_items:
+        good_item.multiple_price = good_item.price * quantity.get(good_item.id, 1)
+
+    # Общая сумма учитывая количество товаров
+    total_sum = sum([good_item.multiple_price for good_item in good_items])
+
+    # Список фотографий к каждому объявлению
+    for good_item in good_items:
+        good_item.photos = Photo.all_photo_items_by_good(good_id=good_item.id)
+
+    return render_template(
+        '/public/shop_cart.html',
+        good_count=good_count,
+        good_items=good_items,
+        quantity=quantity,
+        total_sum=total_sum,
+
     )
 
 
