@@ -6,7 +6,7 @@
 
 {% block body %}
 <div class="container-shop-cart">
-    <h2>Кошик товарів:</h2>
+    <h2 class="header-shop-cart">Кошик товарів:</h2>
     {% for good_item in good_items %}
     <div id="cart-item_{{good_item.id}}" class="cart-item">
         <img src="{% if good_item.photos %}/static/{{ good_item.photos[-1].picture }}{% else %}/static/images/default-image.jpg{% endif %}"

@@ -39,10 +39,17 @@ function addToCart(goodId) {
 }
 
 
+//======================================================================================================================
+// Добавить количество товара и показать новую сумму
+//======================================================================================================================
 function add_quantity(goodId) {
+
+    // Количество
     let currentQuantity = parseInt($("#good_quantity_" + goodId).text());
     currentQuantity ++;
     $("#good_quantity_" + goodId).text(currentQuantity + ' шт');
+
+    // Цена
     let price = $("#price_good_" + goodId).data('price');
     let newPrice = price * currentQuantity;
     $("#price_good_" + goodId).text(newPrice + ' грн');
@@ -55,16 +62,77 @@ function add_quantity(goodId) {
         return accumulator + parseInt(currentValue, 10);
     }, 0);
 
+    // Общая сумма
     $(".cart-total").text('Загальна сума: ' + totalSum + ' грн');
 }
 
+//======================================================================================================================
+// Вычесть количество товара
+//======================================================================================================================
 function subtract_quantity(goodId) {
+
+    // Количество
     let currentQuantity = parseInt($("#good_quantity_" + goodId).text());
+
+    // Если последний товар
     if (currentQuantity == 1) {
+
+        // Убираем div
         $("#cart-item_" + goodId).remove();
+
+        // Обновить список id товаров для записи в куку
+        let productIDs = JSON.parse(Cookies.get('productIDs'));
+        let updatedProductIDs = productIDs.filter(item => item !== goodId);
+
+        // Сохраняем массив в cookie
+        Cookies.set('productIDs', JSON.stringify(updatedProductIDs), { expires: 365, path: '/' });
+
+        // Обновить бейдж
+        let bage = $("#bage");
+        let bageMobile = $("#bage_mobile");
+
+        // Обновлять количество товаров на бейдже
+        let oldValue = bage.text();
+        let newValue = parseInt(oldValue) - 1;
+        bage.text(newValue);
+        bage.addClass("badge badge_favorites");
+        bageMobile.text(newValue);
+        bageMobile.addClass("badge badge_favorites");
+
+        // Записать в куку количество товаров
+        Cookies.set('goodCount', newValue, { expires: 365, path: '/' });
     }
-    currentQuantity --;
-    $("#good_quantity_" + goodId).text(currentQuantity + ' шт');
+
+    // Если НЕ последний товар
+    if (currentQuantity > 1) {
+        // Отнимаем 1
+        currentQuantity --;
+        $("#good_quantity_" + goodId).text(currentQuantity + ' шт');
+
+        // Отнимаем цену
+        let currentPrice = parseInt($('#price_good_' + goodId).text().match(/\d+/g));
+        let newPrice = currentPrice - $("#price_good_" + goodId).data('price');
+        $("#price_good_" + goodId).text(newPrice + ' грн');
+
+    }
+
+    // Извлечь все числа из строки
+    let allPrices = $('.cart-item-price').text().match(/\d+/g);
+    if (allPrices !== null) {
+        // Преобразовать каждое число из строки в число и посчитать их сумму
+        let totalSum = allPrices.reduce(function(accumulator, currentValue) {
+            return accumulator + parseInt(currentValue, 10);
+        }, 0);
+    }
+
+    if (allPrices === null) {
+        let totalSum = 0;
+        $(".header-shop-cart").text("У кошику немає товарів");
+        $(".cart-total").remove();
+    }
+
+    // Общая сумма
+    $(".cart-total").text('Загальна сума: ' + totalSum + ' грн');
 }
 
 //======================================================================================================================
