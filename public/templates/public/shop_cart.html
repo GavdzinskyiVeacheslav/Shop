@@ -1,25 +1,27 @@
 {% extends '/public/layout.html' %}
 
 {% block specific_header %}
+<script src="/static/js/goods.js" defer></script>
 {% endblock specific_header %}
 
 {% block body %}
 <div class="container-shop-cart">
-    <h2>Корзина товаров:</h2>
+    <h2>Кошик товарів:</h2>
     {% for good_item in good_items %}
-    <div class="cart-item">
+    <div id="cart-item_{{good_item.id}}" class="cart-item">
         <img src="{% if good_item.photos %}/static/{{ good_item.photos[-1].picture }}{% else %}/static/images/default-image.jpg{% endif %}"
                      alt="Нет картинки">
         <div class="cart-item-details">
             <div class="cart-item-title">{{ good_item.name }}</div>
-            <div class="cart-item-price">{{ good_item.price }} грн</div>
+            <div data-price={{good_item.price}} id="price_good_{{good_item.id}}" class="cart-item-price">{{ good_item.price }} грн</div>
             <div class="cart-item-quantity">
-                 {{ quantity.get(good_item.id, 1) }} шт
-                <button class="cart-item-remove">Удалить</button>
+                <button onclick="add_quantity({{good_item.id}});" title="Додати" class="my_buttons add-to-cart"><i class="fa-solid fa-plus"></i></button>
+                 <b id="good_quantity_{{good_item.id}}">{{ quantity.get(good_item.id, 1) }} шт</b>
+                <button onclick="subtract_quantity({{good_item.id}});" title="Видалити" class="my_buttons remove-from-cart"><i class="fa-solid fa-minus"></i></button>
             </div>
         </div>
     </div>
     {% endfor %}
-    <div class="cart-total">Общая сумма: {{ total_sum }} грн</div>
+    <div data-total_sum={{total_sum}} class="cart-total">Загальна сума: {{ total_sum }} грн</div>
 </div>
 {% endblock body %}

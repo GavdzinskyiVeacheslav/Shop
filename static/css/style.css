@@ -2255,12 +2255,13 @@ input[type="number"] {
 .cart-item-title {
     font-size: 18px;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .cart-item-price {
     font-size: 16px;
-    color: #555;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .cart-item-quantity {
@@ -2287,6 +2288,7 @@ input[type="number"] {
     text-align: right;
     font-size: 18px;
     margin-top: 20px;
+    font-weight: bold;
 }
 
 @media (max-width: 768px) {
@@ -2307,3 +2309,43 @@ input[type="number"] {
         text-align: left;
     }
 }
+
+/* Кнопки для добавить-убрать товар из корзины */
+
+.my_buttons {
+    all: unset;
+    width: 35px; /* Фиксированная ширина */
+    height: 35px; /* Фиксированная высота */
+    border: none;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    box-sizing: border-box; /* Учитывает паддинги при расчете ширины */
+    margin: 1px 7px 1px 7px; /* Отступы вокруг кнопки */
+    display: inline-block; /* Оставляет кнопки встроенными */
+    text-align: center; /* Центрирует текст в кнопке */
+}
+
+my_buttons:hover {
+  transform: scale(1.1);
+}
+
+.add-to-cart {
+  background-color: #ffb6c1;  /* Светло-розовый цвет */
+  color: white;
+}
+
+.add-to-cart:hover {
+  background-color: #c95a5f; /* Тёмно-розовый */
+}
+
+.remove-from-cart {
+  background-color: #ffb6c1;  /* Светло-розовый цвет */
+  color: white;
+}
+
+.remove-from-cart:hover {
+  background-color: #c95a5f; /* Тёмно-розовый */
+}
+

@@ -38,6 +38,35 @@ function addToCart(goodId) {
 
 }
 
+
+function add_quantity(goodId) {
+    let currentQuantity = parseInt($("#good_quantity_" + goodId).text());
+    currentQuantity ++;
+    $("#good_quantity_" + goodId).text(currentQuantity + ' шт');
+    let price = $("#price_good_" + goodId).data('price');
+    let newPrice = price * currentQuantity;
+    $("#price_good_" + goodId).text(newPrice + ' грн');
+
+    // Извлечь все числа из строки
+    let allPrices = $('.cart-item-price').text().match(/\d+/g);
+
+    // Преобразовать каждое число из строки в число и посчитать их сумму
+    let totalSum = allPrices.reduce(function(accumulator, currentValue) {
+        return accumulator + parseInt(currentValue, 10);
+    }, 0);
+
+    $(".cart-total").text('Загальна сума: ' + totalSum + ' грн');
+}
+
+function subtract_quantity(goodId) {
+    let currentQuantity = parseInt($("#good_quantity_" + goodId).text());
+    if (currentQuantity == 1) {
+        $("#cart-item_" + goodId).remove();
+    }
+    currentQuantity --;
+    $("#good_quantity_" + goodId).text(currentQuantity + ' шт');
+}
+
 //======================================================================================================================
 // Переходим на товара передавая поиск и страницу в query_params
 //======================================================================================================================
