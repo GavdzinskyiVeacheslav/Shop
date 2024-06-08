@@ -78,6 +78,7 @@
                                     </div>
                                 </a>
                                 </li>
+                                {% if not shop_cart_page %}
                                 <li class="list-inline-item item_favorite"><a href="/shop_cart" aria-label="Кошик">
                                     <div>
                                         <div id="cart" class="user_panel_icon"><i class="bi bi-cart3"></i></div>
@@ -86,6 +87,7 @@
                                     </div>
                                 </a>
                                 </li>
+                                {% endif %}
                             </ul>
                         </div>
                     </li>

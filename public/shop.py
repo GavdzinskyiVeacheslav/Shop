@@ -132,7 +132,7 @@ def shop_cart():
         good_items=good_items,
         quantity=quantity,
         total_sum=total_sum,
-
+        shop_cart_page=True,
     )
 
 

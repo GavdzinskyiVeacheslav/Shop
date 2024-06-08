@@ -6,7 +6,11 @@
 
 {% block body %}
 <div class="container-shop-cart">
+    {% if not good_items %}
+    <h2 class="header-shop-cart">У кошику немає товарів</h2>
+    {% else %}
     <h2 class="header-shop-cart">Кошик товарів:</h2>
+    {% endif %}
     {% for good_item in good_items %}
     <div id="cart-item_{{good_item.id}}" class="cart-item">
         <img src="{% if good_item.photos %}/static/{{ good_item.photos[-1].picture }}{% else %}/static/images/default-image.jpg{% endif %}"
@@ -22,6 +26,8 @@
         </div>
     </div>
     {% endfor %}
+    {% if good_items %}
     <div data-total_sum={{total_sum}} class="cart-total">Загальна сума: {{ total_sum }} грн</div>
+    {% endif %}
 </div>
 {% endblock body %}

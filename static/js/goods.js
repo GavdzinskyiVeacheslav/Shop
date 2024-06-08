@@ -118,15 +118,14 @@ function subtract_quantity(goodId) {
 
     // Извлечь все числа из строки
     let allPrices = $('.cart-item-price').text().match(/\d+/g);
+    let totalSum = 0;
+
     if (allPrices !== null) {
         // Преобразовать каждое число из строки в число и посчитать их сумму
-        let totalSum = allPrices.reduce(function(accumulator, currentValue) {
+        totalSum = allPrices.reduce(function(accumulator, currentValue) {
             return accumulator + parseInt(currentValue, 10);
         }, 0);
-    }
-
-    if (allPrices === null) {
-        let totalSum = 0;
+    } else {
         $(".header-shop-cart").text("У кошику немає товарів");
         $(".cart-total").remove();
     }
@@ -314,7 +313,7 @@ function expandAdDesc() {
 //======================================================================================================================
 function getCookie() {
    let goodCount = Cookies.get('goodCount');
-   if (goodCount) {
+   if (goodCount && goodCount !== 'NaN') {
     let bage = $("#bage");
     let bageMobile = $("#bage_mobile");
     bage.text(goodCount);
