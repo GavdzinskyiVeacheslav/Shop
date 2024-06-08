@@ -49,17 +49,18 @@ function add_quantity(goodId) {
     currentQuantity ++;
     $("#good_quantity_" + goodId).text(currentQuantity + ' шт');
 
-    // Цена
-    let price = $("#price_good_" + goodId).data('price');
-    let newPrice = price * currentQuantity;
-    $("#price_good_" + goodId).text(newPrice + ' грн');
-
-    // Извлечь все числа из строки
+    // Берём все цены и все количества
     let allPrices = $('.cart-item-price').text().match(/\d+/g);
+    let allQuantities = $('.cart-item-quantity').text().match(/\d+/g);
 
-    // Преобразовать каждое число из строки в число и посчитать их сумму
-    let totalSum = allPrices.reduce(function(accumulator, currentValue) {
-        return accumulator + parseInt(currentValue, 10);
+    // Перемножаем элементы двух списков
+    let result = allPrices.map(function(value, index) {
+        return value * allQuantities[index];
+    });
+
+    // Находим сумму элементов результирующего списка
+    let totalSum = result.reduce(function(accumulator, currentValue) {
+        return accumulator + currentValue;
     }, 0);
 
     // Общая сумма
@@ -108,23 +109,26 @@ function subtract_quantity(goodId) {
         // Отнимаем 1
         currentQuantity --;
         $("#good_quantity_" + goodId).text(currentQuantity + ' шт');
-
-        // Отнимаем цену
-        let currentPrice = parseInt($('#price_good_' + goodId).text().match(/\d+/g));
-        let newPrice = currentPrice - $("#price_good_" + goodId).data('price');
-        $("#price_good_" + goodId).text(newPrice + ' грн');
-
     }
 
     // Извлечь все числа из строки
     let allPrices = $('.cart-item-price').text().match(/\d+/g);
+    let allQuantities = $('.cart-item-quantity').text().match(/\d+/g);
     let totalSum = 0;
 
     if (allPrices !== null) {
-        // Преобразовать каждое число из строки в число и посчитать их сумму
-        totalSum = allPrices.reduce(function(accumulator, currentValue) {
-            return accumulator + parseInt(currentValue, 10);
+        // Перемножаем элементы двух списков
+        let result = allPrices.map(function(value, index) {
+            return parseInt(value) * allQuantities[parseInt(index)];
+        });
+        // Находим сумму элементов результирующего списка
+        let totalSum = result.reduce(function(accumulator, currentValue) {
+            return accumulator + currentValue;
         }, 0);
+
+        // Общая сумма
+        $(".cart-total").text('Загальна сума: ' + totalSum + ' грн');
+
     } else {
         $(".header-shop-cart").text("У кошику немає товарів");
         $(".cart-total").remove();
@@ -132,8 +136,6 @@ function subtract_quantity(goodId) {
         Cookies.remove('goodCount');
     }
 
-    // Общая сумма
-    $(".cart-total").text('Загальна сума: ' + totalSum + ' грн');
 }
 
 //======================================================================================================================
