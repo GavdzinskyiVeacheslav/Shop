@@ -83,7 +83,7 @@ class Good(object):
 
     @property
     def category(self):
-        return Category(category_id=self.section.category_id) if not self.__category else self.__category
+        return Category(category_id=self.__category_id) if not self.__category else self.__category
 
     # CRUD #
 

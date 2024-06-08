@@ -90,23 +90,25 @@ def section_list(category, section):
     else:
         section_item = 0
 
-    # Собрать айдишники товаров по категории и по разделу
-    good_ids_by_category = Good.get_ids_by_category(category_id=category_item.id if category else 0)
-    good_ids_by_section = Good.get_ids_by_section(section_id=section_item.id if section else 0)
+    # Отфильтровать по категории или разделу в зависимости от того что пришло
+    filtered_good_ids = []
 
-    # Фильтруем в зависимости от того что пришло
-    filtered_list_ids = []
-    if good_ids_by_section:
-        filtered_list_ids = good_ids_by_section
-    if good_ids_by_category and not good_ids_by_section:
-        filtered_list_ids = good_ids_by_category
+    # Фильтр по категории
+    if category_item.id:
+        good_ids_by_category = Good.get_ids_by_category(category_id=category_item.id)
+        filtered_good_ids = good_ids_by_category
+
+    # Фильтр по разделу
+    if section:
+        good_ids_by_section = Good.get_ids_by_section(section_id=section_item.id if section else 0)
+        filtered_good_ids = good_ids_by_section
 
     # Страница и кол. объявлений на странице для пагинации
     page = parse_int(request.args.get("p", 1))
-    final_list_ids = paginate_goods(filtered_list_ids, page)
+    final_list_ids = paginate_goods(filtered_good_ids, page)
 
     # Собрать объекты
-    final_list = [Good(good_id=good_id) for good_id in filtered_list_ids]
+    final_list = [Good(good_id=good_id) for good_id in filtered_good_ids]
 
     # Список фотографий к каждому объявлению
     for good_item in final_list:
@@ -117,7 +119,7 @@ def section_list(category, section):
         goods_list=final_list,
         records_per_page=RECORDS_PER_PAGE,
         current_page=page,
-        pagination=generate_pagination(filtered_list_ids, page, final_list),
+        pagination=generate_pagination(filtered_good_ids, page, final_list),
     )
 
 
