@@ -196,8 +196,9 @@
 
         <div class="mobile_menu_block" style="border-top:1px solid #eee;">
             <div><a href="/delivery"><i class="fa-solid fa-truck fa-fw me-2"></i>Доставка</a></div>
-            <div><a href="/warranty_and_returns"><img style="margin-left: -3px" src="static/images/logos/quarantee.svg"
-                                           width="22" height="22" alt="Нет картинки">&nbsp;&nbsp;&nbsp;Гарантія та повернення</a></div>
+            <div><a href="/warranty_and_returns"><img style="margin-left: -3px"
+            src="{{ url_for('static', filename='/images/logos/quarantee.svg') }}"
+            width="22" height="22" alt="Нет картинки">&nbsp;&nbsp;&nbsp;Гарантія та повернення</a></div>
             <div><a href="/contacts"><i class="fa-solid fa-phone-volume fa-rotate-by fa-fw me-2"
                                          style="--fa-rotate-angle: 330deg;"></i>Контакти</a></div>
             <div><a href="/feedback"><i class="fa-regular fa-comments fa-fw me-2"></i>Відгуки</a></div>
@@ -293,6 +294,7 @@
             <div class="mobile_menu_bottom_item_text">Категорії</div>
         </a>
     </div>
+    {% if not shop_cart_page %}
     <div class="bottom_item_add_mobile">
         <a href="/shop_cart">
             <div class="mobile_menu_bottom_item_icon"><i class="bi bi-cart3"></i></div>
@@ -300,4 +302,5 @@
             <div id="bage_mobile"><span style="display: none;">0</span></div>
         </a>
     </div>
+    {% endif %}
 </div>

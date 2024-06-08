@@ -131,6 +131,18 @@ class Good(object):
         return dao.all_goods_ids()
 
     @staticmethod
-    def good_ids_by_search(search=''):
+    def get_ids_by_search(search=''):
         """Список айдишников товаров по поиску"""
-        return dao.good_ids_by_search(search=search)
+        return dao.get_ids_by_search(search=search)
+
+    @staticmethod
+    def get_ids_by_category(category_id=0):
+        """Список айдишников товаров по категории"""
+        return dao.get_ids_by_category(category_id=category_id)
+
+    @staticmethod
+    def get_ids_by_section(section_id=0):
+        """Список айдишников товаров по разделу"""
+        return dao.get_ids_by_section(section_id=section_id)
+
+

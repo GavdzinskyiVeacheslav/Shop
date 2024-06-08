@@ -128,6 +128,8 @@ function subtract_quantity(goodId) {
     } else {
         $(".header-shop-cart").text("У кошику немає товарів");
         $(".cart-total").remove();
+        Cookies.remove('productIDs');
+        Cookies.remove('goodCount');
     }
 
     // Общая сумма

@@ -84,7 +84,7 @@ def all_goods_ids():
     return [row['id'] for row in rows]
 
 
-def good_ids_by_search(search=''):
+def get_ids_by_search(search=''):
     rows = db.db_statement(
         statement_type='List',
         sql=f"""
@@ -101,3 +101,31 @@ def good_ids_by_search(search=''):
     return [row['id'] for row in rows]
 
 
+def get_ids_by_category(category_id=0):
+    rows = db.db_statement(
+        statement_type='List',
+        sql=f"""
+            SELECT id
+            FROM goods
+            WHERE category_id = %s
+        """,
+        params=(
+            category_id,
+        )
+    )
+    return [row['id'] for row in rows]
+
+
+def get_ids_by_section(section_id=0):
+    rows = db.db_statement(
+        statement_type='List',
+        sql=f"""
+            SELECT id
+            FROM goods
+            WHERE section_id = %s
+        """,
+        params=(
+            section_id,
+        )
+    )
+    return [row['id'] for row in rows]

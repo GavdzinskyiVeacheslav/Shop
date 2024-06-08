@@ -14,7 +14,7 @@ RECORDS_PER_PAGE = 12
 def get_good_ids_after_search(search, all_goods_ids):
     """Получить список айдишников товаров после поиска"""
     if search:
-        goods_by_search = Good.good_ids_by_search(search=search)
+        goods_by_search = Good.get_ids_by_search(search=search)
         return set(all_goods_ids).intersection(set(goods_by_search))
     return set(all_goods_ids)
 

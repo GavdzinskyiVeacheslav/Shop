@@ -3,8 +3,10 @@ import urllib.parse
 
 from flask import render_template, request
 
+from business.category import Category
 from business.good import Good
 from business.photo import Photo
+from business.section import Section
 from public.routes import public_bp
 from utils.common import (parse_int, cut_inject, RECORDS_PER_PAGE, get_good_ids_after_search, paginate_goods,
                           generate_pagination, find_duplicates)
@@ -45,50 +47,77 @@ def goods():
     )
 
 
-# TODO создать раут для перехода на страницу товара
-# """Страница конкретного товара"""
-# TODO 1. Сделать новый раут в shop.py этот раут будет динамический и он будет для показа конкретного товара назвать
-#  например /good_page/<int:good_id>  - если тяжело посмотреть информацию про динамические рауты flask.
-#    1.1 Внутри раута должен собираться объект данного товара и передаваться дальше в шаблон.
-#    1.2  # Список фотографий к товару
-#         for good_item in final_list:
-#         good_item.photos = Photo.all_photo_items_by_good(good_id=good_item.id)
-#    и передаваться дальше в шаблон.
-#    1.3 Если передали id которого у нас нет в базе нужно показать кастомный шаблон 404 -
-#     1.4 Пусть этот раут возвращает good_page.html в котором должен сохраниться header и footer как на
-#     главной странице но середина должна показывать: Галерею фотографий полное описание всю нужную информацию и кнопку
-#     купить.
+@public_bp.route("/good_page/<int:good_id>")
+def good_page(good_id):
+    """Страница конкретного товара"""
 
+    # Получить товар
+    good_item = Good(good_id=parse_int(good_id))
 
-# TODO создать раут который будет обрабатывать приём категории и раздела
-# """Переход по названию категории или раздела"""
-#     # TODO Отдать 404 если передали несуществующую категорию или раздел
-#
-#     # TODO Отфильтровать таким образом что если пришла категория то все товары по категории,
-#     #  если пришла категория и раздел то все товары только по этой категории и по этому разделу
-#     filtered_list_ids = []
-#
-#     # TODO Страница и кол. объявлений на странице для пагинации
-#
-#     # TODO собрать объекты
-#     final_list = []
-#
-#     # TODO Список фотографий к каждому объявлению
-#
-#     # TODO Категории и разделы
-#
-#     # TODO Добавить js для обработки такого раута или добавить в тот который фильтрует по названию товара
-#
-#    render template возвращает good.html и нужные для работы переменные
+    # Товар не найден отдаём 404
+    if not good_item.id:
+        return render_template(
+            '/public/404.html',
+        )
 
-
-@public_bp.route("/test")
-def test():
-    good_item = Good(good_id=2)
+    # Список фотографий к объявлению
     good_item.photos = Photo.all_photo_items_by_good(good_id=good_item.id)
+
     return render_template(
         '/public/good_page.html',
         good_item=good_item,
+    )
+
+
+@public_bp.route('/<category>/', defaults={"section": ''})
+@public_bp.route('/<category>/<section>/')
+def section_list(category, section):
+    """Переход по названию категории или раздела"""
+
+    # Отдать 404 если передали несуществующую категорию или раздел
+    category_item = Category.get_category_by_folder(category)
+    if not category_item:
+        return render_template(
+            '/404.html',
+        )
+
+    if section:
+        section_item = Section.get_section_by_folder(section)
+        if not section_item:
+            return render_template(
+                '/404.html',
+            )
+    else:
+        section_item = 0
+
+    # Собрать айдишники товаров по категории и по разделу
+    good_ids_by_category = Good.get_ids_by_category(category_id=category_item.id if category else 0)
+    good_ids_by_section = Good.get_ids_by_section(section_id=section_item.id if section else 0)
+
+    # Фильтруем в зависимости от того что пришло
+    filtered_list_ids = []
+    if good_ids_by_section:
+        filtered_list_ids = good_ids_by_section
+    if good_ids_by_category and not good_ids_by_section:
+        filtered_list_ids = good_ids_by_category
+
+    # Страница и кол. объявлений на странице для пагинации
+    page = parse_int(request.args.get("p", 1))
+    final_list_ids = paginate_goods(filtered_list_ids, page)
+
+    # Собрать объекты
+    final_list = [Good(good_id=good_id) for good_id in filtered_list_ids]
+
+    # Список фотографий к каждому объявлению
+    for good_item in final_list:
+        good_item.photos = Photo.all_photo_items_by_good(good_id=good_item.id)
+
+    return render_template(
+        '/public/goods.html',
+        goods_list=final_list,
+        records_per_page=RECORDS_PER_PAGE,
+        current_page=page,
+        pagination=generate_pagination(filtered_list_ids, page, final_list),
     )
 
 
@@ -103,28 +132,36 @@ def shop_cart():
     good_count = parse_int(data.get('goodCount'))
     good_ids_encoded = data.get('productIDs')
 
-    # Декодировать строку
-    good_ids_decoded = urllib.parse.unquote(good_ids_encoded)
+    # Инициализация нужных переменных
+    good_items = []
+    quantity = 0
+    total_sum = 0
 
-    # Преобразовать строку в список
-    good_ids = json.loads(good_ids_decoded)
+    # Если кука не пустая
+    if good_ids_encoded:
 
-    # Количество каждого товара
-    quantity = find_duplicates(good_ids)
+        # Декодировать строку
+        good_ids_decoded = urllib.parse.unquote(good_ids_encoded)
 
-    # Собрать объекты товаров
-    good_items = [Good(good_id=good_id) for good_id in list(set(good_ids))]
+        # Преобразовать строку в список
+        good_ids = json.loads(good_ids_decoded)
 
-    # Динамически создадим новый атрибут, запишем в него цену учитывая количество
-    for good_item in good_items:
-        good_item.multiple_price = good_item.price * quantity.get(good_item.id, 1)
+        # Количество каждого товара
+        quantity = find_duplicates(good_ids)
 
-    # Общая сумма учитывая количество товаров
-    total_sum = sum([good_item.multiple_price for good_item in good_items])
+        # Собрать объекты товаров
+        good_items = [Good(good_id=good_id) for good_id in list(set(good_ids))]
 
-    # Список фотографий к каждому объявлению
-    for good_item in good_items:
-        good_item.photos = Photo.all_photo_items_by_good(good_id=good_item.id)
+        # Динамически создадим новый атрибут, запишем в него цену учитывая количество
+        for good_item in good_items:
+            good_item.multiple_price = good_item.price * quantity.get(good_item.id, 1)
+
+        # Общая сумма учитывая количество товаров
+        total_sum = sum([good_item.multiple_price for good_item in good_items])
+
+        # Список фотографий к каждому объявлению
+        for good_item in good_items:
+            good_item.photos = Photo.all_photo_items_by_good(good_id=good_item.id)
 
     return render_template(
         '/public/shop_cart.html',
