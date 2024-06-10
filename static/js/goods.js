@@ -195,29 +195,34 @@ $(document).ready(function() {
 });
 
 //======================================================================================================================
-// Установить фильтр по категориям   // Проверить
+//
 //======================================================================================================================
-function set_category_filter(category_id) {
+function shipping_data() {
 
-     $('#section_list')
-        .empty()
-        .html(spinner);
+    goodIds = []
+    $('.cart-item').each(function() {
+        goodIds.push($(this).data('good_id'));
+    });
 
     PostRequest(
-        url = '/list_section_by_category',
+        url = '/pass_cart',
         params = {
-            category_id: category_id,
+            goods_quantity:    $('.cart-item-quantity').text().match(/\d+/g),
+            good_prices:       $('.cart-item-price').text().match(/\d+/g),
+            good_ids:          goodIds,
+            payment_method:    $('input[name="payment"]:checked').val(),
         },
+
         success_function = function(result) {
-            if ($('#category_list').val() == 0) {
-                $('#section_list').empty().append('<option value="0">Выберите раздел</option>').prop('disabled', true);
-            } else {
-                $('#section_list').prop('disabled', false);
-                $('#section_list').html(result.data);
-            }
+            location.href = '/shipping_data';
+        },
+
+        failure_function = function(result) {
+            if (!result.error) result.error = 'Ошибка';
         }
     );
 }
+
 
 //======================================================================================================================
 // Ограничивает количество добавляемых фотографий, не больше (10)
@@ -244,31 +249,6 @@ function fill_image_array(){
         images_array.push(i);
       });
 }
-
-//======================================================================================================================
-// Список разделов по выбору категорий  // Проверить
-//======================================================================================================================
-function sections_list(category_id) {
-
-    $('#section_list')
-       .empty()
-
-    PostRequest(
-        url = '/list_section_by_category',
-        params = {
-            category_id: category_id,
-        },
-        success_function = function(result) {
-            if ($('#category_list').val() == 0) {
-                $('#section_list').append('<option value="0">Выберите раздел</option>').prop('disabled', true);
-            } else {
-                $('#section_list').prop('disabled', false);
-                $('#section_list').html(result.data);
-            }
-        }
-    );
-}
-
 
 //======================================================================================================================
 // Галерея

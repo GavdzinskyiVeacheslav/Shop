@@ -1,7 +1,7 @@
 import json
 import urllib.parse
 
-from flask import render_template, request
+from flask import render_template, request, session
 
 from business.category import Category
 from business.good import Good
@@ -9,7 +9,7 @@ from business.photo import Photo
 from business.section import Section
 from public.routes import public_bp
 from utils.common import (parse_int, cut_inject, RECORDS_PER_PAGE, get_good_ids_after_search, paginate_goods,
-                          generate_pagination, find_duplicates)
+                          generate_pagination, find_duplicates, return_success)
 
 
 @public_bp.route("/")
@@ -172,6 +172,70 @@ def shop_cart():
         quantity=quantity,
         total_sum=total_sum,
         shop_cart_page=True,
+    )
+
+
+@public_bp.route("/pass_cart", methods=['POST'])
+def pass_cart():
+    """Передать корзину дальше"""
+
+    # Берём данные с формы
+    data = request.form
+
+    # Extract values from the ImmutableMultiDict
+    goods_quantity = data.getlist('goods_quantity[]')
+    good_prices = data.getlist('good_prices[]')
+    good_ids = data.getlist('good_ids[]')
+    payment_method = data.get('payment_method')
+
+    # Convert the lists to a more structured form if needed
+    goods_to_pass = [
+        {'id': gid, 'quantity': qty, 'price': price}
+        for gid, qty, price in zip(good_ids, goods_quantity, good_prices)
+    ]
+
+    # Записать в сессию
+    session['goods'] = goods_to_pass
+    session['payment_method'] = payment_method
+
+    # Переходим на заполнение формы
+    return return_success()
+
+
+@public_bp.route("/shipping_data")
+def shipping_data():
+    """Форма для заполнения данных клиента"""
+
+    # Достать данные из сессии
+    goods_from_session = session['goods']
+    payment_method = session['payment_method']
+
+    # Достать только айдишники
+    good_ids = [int(item['id']) for item in goods_from_session]
+
+    # Количество
+    quantity = {int(item['id']): int(item['quantity']) for item in goods_from_session}
+
+    # Сделать объекты
+    good_items = [Good(good_id=good_id) for good_id in good_ids]
+
+    # Динамически создадим новый атрибут, запишем в него цену учитывая количество
+    for good_item in good_items:
+        good_item.multiple_price = good_item.price * quantity.get(good_item.id, 1)
+
+    # Общая сумма учитывая количество товаров
+    total_sum = sum([good_item.multiple_price for good_item in good_items])
+
+    # Список фотографий к каждому объявлению
+    for good_item in good_items:
+        good_item.photos = Photo.all_photo_items_by_good(good_id=good_item.id)
+
+    return render_template(
+        '/public/shipping_data.html',
+        good_items=good_items,
+        payment_method=payment_method,
+        total_sum=total_sum,
+        quantity=quantity,
     )
 
 

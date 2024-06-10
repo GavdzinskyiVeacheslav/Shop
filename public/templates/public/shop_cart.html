@@ -2,6 +2,7 @@
 
 {% block specific_header %}
 <script src="/static/js/goods.js" defer></script>
+<script src="/static/js/control.js" defer></script>
 {% endblock specific_header %}
 
 {% block body %}
@@ -12,7 +13,7 @@
     <h2 class="header-shop-cart">Кошик товарів:</h2>
     {% endif %}
     {% for good_item in good_items %}
-    <div id="cart-item_{{good_item.id}}" class="cart-item">
+    <div id="cart-item_{{good_item.id}}" data-good_id={{good_item.id}} class="cart-item">
         <img src="{% if good_item.photos %}/static/{{ good_item.photos[-1].picture }}{% else %}/static/images/default-image.jpg{% endif %}"
                      alt="Нет картинки">
         <div class="cart-item-details">
@@ -29,5 +30,19 @@
     {% if good_items %}
     <div data-total_sum={{total_sum}} class="cart-total">Загальна сума: {{ total_sum }} грн</div>
     {% endif %}
+    <div class="wrapper-payment-options">
+        <div class="payment-options">
+            <h3>Оберіть спосіб оплати</h3>
+            <div class="payment-option">
+                <input type="radio" id="card" name="payment" value="card">
+                <label for="card">Оплата карткою</label>
+            </div>
+            <div class="payment-option">
+                <input type="radio" id="cash-on-delivery" name="payment" value="cash-on-delivery">
+                <label for="cash-on-delivery">Накладений платіж</label>
+            </div>
+            <button class="button-continue" onclick="shipping_data();">Продовжити</button>
+        </div>
+    </div>
 </div>
 {% endblock body %}

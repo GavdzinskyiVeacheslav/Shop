@@ -2290,6 +2290,7 @@ input[type="number"] {
     text-align: right;
     font-size: 18px;
     margin-top: 20px;
+    margin-bottom: 7px;
     font-weight: bold;
 }
 
@@ -2351,3 +2352,104 @@ my_buttons:hover {
   background-color: #c95a5f; /* Тёмно-розовый */
 }
 
+/* Способ оплаты radio */
+.wrapper-payment-options {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-options {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.payment-options h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.payment-option {
+    margin-bottom: 15px;
+}
+
+.payment-option input[type="radio"] {
+    display: none;
+}
+
+.payment-option label {
+    display: block;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 20px; /* Закругление углов */
+}
+
+.payment-option label:hover {
+    background-color: #ffb6c1;
+}
+
+.payment-option input[type="radio"]:checked + label {
+    background-color: #ffb6c1;
+    border-color: #D8005F;
+}
+
+.button-continue {
+    background-color: #ec6a70;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 20px; /* Закругление углов */
+}
+
+.button-continue:hover {
+    background-color: #c95a5f;
+}
+
+
+/* Форма приёма данных */
+.wrapper-client-data {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.client-data-input {
+    margin-bottom: 15px;
+    padding: 10px 20px 10px 40px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+#client-name {
+    width: 320px;
+}
+
+.client-data-button {
+    padding: 10px;
+    color: #fff;
+    background-color: #ec6a70;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.client-data-button:hover {
+    background-color: #c95a5f;
+}

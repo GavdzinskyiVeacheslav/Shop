@@ -1,0 +1,35 @@
+{% extends '/public/layout.html' %}
+
+{% block specific_header %}
+
+{% endblock specific_header %}
+
+{% block body %}
+<h1>Оформлення замовлення</h1>
+<div class="container-shop-cart">
+    {% for good_item in good_items %}
+    <div class="cart-item">
+        <img src="{% if good_item.photos %}/static/{{ good_item.photos[-1].picture }}{% else %}/static/images/default-image.jpg{% endif %}"
+             alt="Нет картинки">
+        <div class="cart-item-details">
+            <div class="cart-item-title">{{ good_item.name }}</div>
+            <div class="cart-item-price">{{ good_item.price }} грн</div>
+            <div class="cart-item-quantity">
+                <b id="good_quantity_{{good_item.id}}">{{ quantity.get(good_item.id, 1) }} шт</b>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="cart-total">Загальна сума: {{ total_sum }} грн</div>
+    <div class="wrapper-client-data">
+        <h2>Ваші контактні дані</h2>
+        <input class="client-data-input" placeholder="Прізвище ім'я по батькові" type="text" id="client-name"
+               name="client-name">
+        <input class="client-data-input" placeholder="Номер телефону" type="text" id="phone" name="phone">
+        <input class="client-data-input" placeholder="Місто" type="text" id="city" name="city">
+        <input title="Можна тільки номер" class="client-data-input" placeholder="Відділення Нової Пошти" type="text" id="post-office"
+               name="post-office">
+        <button class="client-data-button">Оформити замовлення</button>
+    </div>
+</div>
+{% endblock body %}
