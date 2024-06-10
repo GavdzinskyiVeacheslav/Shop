@@ -86,7 +86,6 @@ class Good(object):
         return Category(category_id=self.__category_id) if not self.__category else self.__category
 
     # CRUD #
-
     def insert(self, **params):
         """Добавление записи в БД"""
         dto = model.Good(**params)
@@ -114,13 +113,13 @@ class Good(object):
         self.__reload(self.__id)
 
     @staticmethod
-    def delete(order_id):
+    def delete(good_id):
         """Удаление записи из БД"""
-        dto = dao.get(order_id)
+        dto = dao.get(good_id)
         if dto is None:
             return None
         deleted = dao.delete(
-            order_id,
+            good_id,
         )
         return True if deleted else False
 
@@ -144,5 +143,3 @@ class Good(object):
     def get_ids_by_section(section_id=0):
         """Список айдишников товаров по разделу"""
         return dao.get_ids_by_section(section_id=section_id)
-
-

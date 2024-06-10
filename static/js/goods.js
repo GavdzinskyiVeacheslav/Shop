@@ -233,17 +233,9 @@ function shipping_data() {
 //======================================================================================================================
 function createOrder() {
 
-    let goodIds = []
-    $('.cart-item').each(function() {
-        goodIds.push($(this).data('good_id'));
-    });
-
     PostRequest(
         url = '/create_order',
         params = {
-            goods_quantity:    $('.cart-item-quantity').text().match(/\d+/g),
-            good_prices:       $('.cart-item-price').text().match(/\d+/g),
-            good_ids:          goodIds,
             client_name:       $('#client_name').val(),
             client_phone:      $('#client_phone').val(),
             client_city:       $('#client_city').val(),

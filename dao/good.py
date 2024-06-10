@@ -44,11 +44,11 @@ def update(good: Good):
             UPDATE goods SET
             name        = %s, 
             description = %s,
-            category_id = $s,
-            section_id = $s,
-            add_date = $s,
-            price = $s,
-            existence = $s
+            category_id = %s,
+            section_id  = %s,
+            add_date    = %s,
+            price       = %s,
+            existence   = %s
             WHERE id    = %s
         """,
         params=([getattr(good, field) for field in ['name', 'description', 'category_id', 'section_id',

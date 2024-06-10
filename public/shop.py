@@ -242,14 +242,9 @@ def shipping_data():
 @public_bp.route("/create_order", methods=['POST'])
 def create_order():
     """Создать заказ"""
-    # Берём данные с формы
-    data = request.form
 
-    # Extract values from the ImmutableMultiDict
-    goods_quantity = data.getlist('goods_quantity[]')
-    good_prices = data.getlist('good_prices[]')
-    good_ids = data.getlist('good_ids[]')
-    payment_method = session['payment_method']
+    # Данные из формы
+    data = request.form
 
     # Проверка на пустые поля и cut_inject на заполненные
     client_name = cut_inject(text=data.get('client_name'))
@@ -264,6 +259,17 @@ def create_order():
     post_office = cut_inject(text=data.get('post_office'))
     if not post_office:
         return return_error(error="Заповніть Відділення Нової Пошти")
+
+    # Данные из сессии
+    goods_from_session = session['goods']
+    payment_method = session['payment_method']
+
+    # Сделать нужные строки
+    ids = ",".join(item['id'] for item in goods_from_session)
+    prices = ",".join(item['price'] for item in goods_from_session)
+    quantities = ",".join(item['quantity'] for item in goods_from_session)
+
+
 
     return return_success(data=payment_method)
 
