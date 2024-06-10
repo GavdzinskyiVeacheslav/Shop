@@ -9,7 +9,7 @@ from business.photo import Photo
 from business.section import Section
 from public.routes import public_bp
 from utils.common import (parse_int, cut_inject, RECORDS_PER_PAGE, get_good_ids_after_search, paginate_goods,
-                          generate_pagination, find_duplicates, return_success)
+                          generate_pagination, find_duplicates, return_success, return_error)
 
 
 @public_bp.route("/")
@@ -186,7 +186,7 @@ def pass_cart():
     goods_quantity = data.getlist('goods_quantity[]')
     good_prices = data.getlist('good_prices[]')
     good_ids = data.getlist('good_ids[]')
-    payment_method = data.get('payment_method')
+    payment_method = cut_inject(text=data.get('payment_method'))
 
     # Convert the lists to a more structured form if needed
     goods_to_pass = [
@@ -236,6 +236,44 @@ def shipping_data():
         payment_method=payment_method,
         total_sum=total_sum,
         quantity=quantity,
+    )
+
+
+@public_bp.route("/create_order", methods=['POST'])
+def create_order():
+    """Создать заказ"""
+    # Берём данные с формы
+    data = request.form
+
+    # Extract values from the ImmutableMultiDict
+    goods_quantity = data.getlist('goods_quantity[]')
+    good_prices = data.getlist('good_prices[]')
+    good_ids = data.getlist('good_ids[]')
+    payment_method = session['payment_method']
+
+    # Проверка на пустые поля и cut_inject на заполненные
+    client_name = cut_inject(text=data.get('client_name'))
+    if not client_name:
+        return return_error(error="Заповніть ім'я прізвище та по батькові")
+    client_phone = cut_inject(text=data.get('client_phone'))
+    if not client_phone:
+        return return_error(error="Заповніть номер телефону")
+    client_city = cut_inject(text=data.get('client_city'))
+    if not client_city:
+        return return_error(error="Заповніть місто")
+    post_office = cut_inject(text=data.get('post_office'))
+    if not post_office:
+        return return_error(error="Заповніть Відділення Нової Пошти")
+
+    return return_success(data=payment_method)
+
+
+@public_bp.route("/my_orders")
+def my_orders():
+    """Заказы клиента"""
+    return render_template(
+        '/public/orders.html',
+        orders_page=True,
     )
 
 

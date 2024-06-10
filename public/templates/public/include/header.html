@@ -88,6 +88,16 @@
                                 </a>
                                 </li>
                                 {% endif %}
+                                {% if not orders_page %}
+                                <li class="list-inline-item item_orders"><a href="/my_orders" aria-label="Мої замовлення">
+                                    <div>
+                                        <div id="orders" class="user_panel_icon"><i class="fa-solid fa-list"></i></div>
+                                        <div class="user_panel_text">Замовлення</div>
+                                        <div id="bage_order"><span style="display: none;">0</span></div>
+                                    </div>
+                                </a>
+                                </li>
+                                {% endif %}
                             </ul>
                         </div>
                     </li>
@@ -300,6 +310,15 @@
             <div class="mobile_menu_bottom_item_icon"><i class="bi bi-cart3"></i></div>
             <div class="mobile_menu_bottom_item_text">Кошик</div>
             <div id="bage_mobile"><span style="display: none;">0</span></div>
+        </a>
+    </div>
+    {% endif %}
+    {% if not orders_page %}
+    <div class="bottom_item_add_mobile">
+        <a href="/my_orders">
+            <div class="mobile_menu_bottom_item_icon"><i class="fa-solid fa-list"></i></div>
+            <div class="mobile_menu_bottom_item_text">Замовлення</div>
+            <div id="bage_order_mobile"><span style="display: none;">0</span></div>
         </a>
     </div>
     {% endif %}

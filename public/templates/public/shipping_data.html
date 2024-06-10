@@ -1,7 +1,8 @@
 {% extends '/public/layout.html' %}
 
 {% block specific_header %}
-
+<script src="/static/js/goods.js" defer></script>
+<script src="/static/js/control.js" defer></script>
 {% endblock specific_header %}
 
 {% block body %}
@@ -23,13 +24,12 @@
     <div class="cart-total">Загальна сума: {{ total_sum }} грн</div>
     <div class="wrapper-client-data">
         <h2>Ваші контактні дані</h2>
-        <input class="client-data-input" placeholder="Прізвище ім'я по батькові" type="text" id="client-name"
-               name="client-name">
-        <input class="client-data-input" placeholder="Номер телефону" type="text" id="phone" name="phone">
-        <input class="client-data-input" placeholder="Місто" type="text" id="city" name="city">
-        <input title="Можна тільки номер" class="client-data-input" placeholder="Відділення Нової Пошти" type="text" id="post-office"
-               name="post-office">
-        <button class="client-data-button">Оформити замовлення</button>
+        <input class="client-data-input" placeholder="Прізвище ім'я по батькові" type="text" id="client_name">
+        <input class="client-data-input" placeholder="Номер телефону" type="text" id="client_phone">
+        <input class="client-data-input" placeholder="Місто" type="text" id="client_city">
+        <input class="client-data-input" placeholder="Відділення Нової Пошти" type="text"
+               id="post_office" title="Можна тільки номер">
+        <button class="client-data-button" onclick="createOrder();">Оформити замовлення</button>
     </div>
 </div>
 {% endblock body %}

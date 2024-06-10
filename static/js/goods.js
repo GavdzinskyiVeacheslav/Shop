@@ -146,7 +146,7 @@ function search(page = 1) {
 
     // Проверяем длину searchQuery
     if (searchQuery.length < 3) {
-        alert('Введите название товара не менее трех символов');
+        alert('Введіть назву товару не менш трьох символів');
         return; // Прекращаем выполнение функции, если длина меньше трех
     }
 
@@ -158,7 +158,7 @@ function search(page = 1) {
 
     // Если нажали на поиск, но ничего не ввели
     else {
-        alert('Введите название товара');
+        alert('Введіть назву товару');
     }
 }
 
@@ -195,11 +195,18 @@ $(document).ready(function() {
 });
 
 //======================================================================================================================
-//
+// Переход на форму заполнения данных клиента
 //======================================================================================================================
 function shipping_data() {
 
-    goodIds = []
+    let payment_method = $('input[name="payment"]:checked').val();
+
+    if (!payment_method) {
+        alert('Оберіть спосіб оплати')
+        return;
+    }
+
+    let goodIds = []
     $('.cart-item').each(function() {
         goodIds.push($(this).data('good_id'));
     });
@@ -210,18 +217,54 @@ function shipping_data() {
             goods_quantity:    $('.cart-item-quantity').text().match(/\d+/g),
             good_prices:       $('.cart-item-price').text().match(/\d+/g),
             good_ids:          goodIds,
-            payment_method:    $('input[name="payment"]:checked').val(),
+            payment_method:    payment_method,
         },
 
         success_function = function(result) {
             location.href = '/shipping_data';
         },
 
+        failure_function = function(result) {}
+    );
+}
+
+//======================================================================================================================
+// Создать заказ
+//======================================================================================================================
+function createOrder() {
+
+    let goodIds = []
+    $('.cart-item').each(function() {
+        goodIds.push($(this).data('good_id'));
+    });
+
+    PostRequest(
+        url = '/create_order',
+        params = {
+            goods_quantity:    $('.cart-item-quantity').text().match(/\d+/g),
+            good_prices:       $('.cart-item-price').text().match(/\d+/g),
+            good_ids:          goodIds,
+            client_name:       $('#client_name').val(),
+            client_phone:      $('#client_phone').val(),
+            client_city:       $('#client_city').val(),
+            post_office:       $('#post_office').val(),
+        },
+
+        success_function = function(result) {
+            if (result.data === 'card') {
+                alert('Инициализация платёжной системы');
+            }
+            else {
+                location.href = '/my_orders';
+            }
+        },
+
         failure_function = function(result) {
-            if (!result.error) result.error = 'Ошибка';
+            alert(result.error);
         }
     );
 }
+
 
 
 //======================================================================================================================

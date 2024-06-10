@@ -151,7 +151,7 @@ header .top-menu button.search_button:hover {color:#c95a5f;background:none;}
 header .top-menu .search .search-city {flex-wrap: nowrap;}
 header .top-menu .user_panel {min-width: 50px;padding-left: 20px;line-height:1;}
 header .top-menu .user_panel ul {display: flex;padding: 0;justify-content: space-between;align-items: center;flex-wrap: nowrap;flex-direction: row;list-style: none;}
-header .top-menu .user_panel ul li {text-align:center;margin: 0 !important;position:relative;}
+header .top-menu .user_panel ul li {text-align:center; !important;position:relative;}
 header .drop-content .col-3 {margin-bottom: 20px;}
 .user_panel ul a {color:#181C32;text-decoration:none;}
 .user_panel ul a:hover {color:#c95a5f;}
@@ -246,7 +246,7 @@ a.btn.open_categories_menu, a.btn.close_categories_menu {margin-left: -10px;padd
     .user_panel_icon {margin-bottom:0 !important;}
     .user_panel_text {display:none;}
     li.list-inline-item.search_block {display: block;}
-    .col-custom .list-inline li.item_favorite,.col-custom .list-inline li.item_add,.col-custom .list-inline li.item_profile {display:none;}
+    .col-custom .list-inline li.item_favorite,.col-custom .list-inline li.item_add,.col-custom .list-inline li.item_orders {display:none;}
     header .top-menu button.search_button {}
     a.bottom_item_profile_desk {display:none;}
     .bottom_item_profile_mobile {display:block;}
@@ -440,12 +440,6 @@ form .form-control, form .form-select {font-size: 16px;padding: 8px 12px;}
 .service_border_color label.border_grey:before {background: #9e9e9e;border-color:#9e9e9e;}
 .service_border_color label.border_yellow:before {background: #ffd968;border-color:#ffd968;}
 .service_border_color label.border_pink:before {background: #ef417c;border-color:#ef417c;}
-
-/*
-@media screen and  (max-width:768px){
-    #payment_form .mb-5 {margin-bottom:15px !important;}
-}
-*/
 
 .payment_page_subtitle {text-align: center;font-size: 48px;margin-bottom:10px;}
 .payment_page_description {text-align: center;font-size:18px;color:#6c757d;margin-bottom:30px;}
@@ -2437,7 +2431,7 @@ my_buttons:hover {
     border-radius: 20px;
 }
 
-#client-name {
+#client_name {
     width: 320px;
 }
 
@@ -2452,4 +2446,9 @@ my_buttons:hover {
 
 .client-data-button:hover {
     background-color: #c95a5f;
+}
+
+/* Иконка заказов */
+.item_orders {
+    margin-left: 15px;
 }
